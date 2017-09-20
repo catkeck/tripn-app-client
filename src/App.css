@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+#full-width {
+  width:100%;
+  text-decoration:  none;
+}
+
+#left-half {
+  width: 60%;
+  float: left;
+}
+
+#right-half {
+  width: 40%;
+  float: right;
+}
+
+.logo {
+  float: left;
+}
+
+.auth-links {
+  float: right;
+}
+
+a:link {
+  text-decoration: none;
+  text-color: black;
+}
+
+.list-images img{
+  width: 40%;
+}
+
+.food {
+  float: left;
+}
+
+.itinerary {
+  float: right;
+}
