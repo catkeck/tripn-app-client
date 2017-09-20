@@ -18,12 +18,16 @@ class Weather extends React.Component {
     }
   }
 
+  convertToCelsius(fahrenheit) {
+    return (fahrenheit-32)*5/9
+  }
+
   render() {
     console.log(this.state.weatherData)
 
     return(
       <div>
-        {this.state.weatherData.main ? <div><h1>{this.state.weatherData.main.temp} degrees F</h1><h2>{this.state.weatherData.main.humidity} Humidity</h2><p>{this.state.weatherData.temp_min}</p><p>{this.state.weatherData.temp_max}</p><p>{this.state.weatherData.weather[0].main}({this.state.weatherData.weather[0].description})</p></div> : null}
+        {this.state.weatherData.main ? <div><h1>{this.state.weatherData.main.temp} degrees F/{this.convertToCelsius(this.state.weatherData.main.temp)} degrees C</h1><h2>{this.state.weatherData.main.humidity} Humidity</h2><p>{this.state.weatherData.temp_min}</p><p>{this.state.weatherData.temp_max}</p><p>{this.state.weatherData.weather[0].main}({this.state.weatherData.weather[0].description})</p></div> : null}
 
       </div>
     )

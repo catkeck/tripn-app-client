@@ -44,14 +44,18 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input value={this.state.username} onChange={this.handleUsernameChange} type="text" placeholder="email" />
-        <input value={this.state.password} onChange={this.handlePasswordChange} type='password' placeholder="password" />
-        <input value={this.state.password_confirmation} onChange={this.handlePasswordConfirmationChange} type='password' placeholder='password confirmation' />
-        <input type="submit"/>
-      </form>
+      <div id="login-box">
+        <h1>Sign Up</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input value={this.state.username} onChange={this.handleUsernameChange} type="text" placeholder="username" />
+          <input value={this.state.password} onChange={this.handlePasswordChange} type='password' placeholder="password" />
+          <input value={this.state.password_confirmation} onChange={this.handlePasswordConfirmationChange} type='password' placeholder='password confirmation' />
+          <input type="submit" name="signup_submit" value="Sign Up"/>
+        </form>
+      </div>
     )
   }
 }
+
 
 export default Signup
