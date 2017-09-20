@@ -6,7 +6,8 @@ class Profile extends React.Component {
     super();
     this.state = {
       username: "",
-      searchTerm: ""
+      coordinates: "",
+      searchTerm: "",
     }
   }
 
@@ -21,9 +22,20 @@ class Profile extends React.Component {
     this.props.history.history.push(`/search/${this.state.searchTerm}`)
   }
 
+  // latitude,longitude
+
+  handleDetectLocation = (event) => {
+    event.preventDefault();
+    this.props.history.history.push(`/search/${this.state.coordinates}`)
+  }
+
+
   componentDidMount() {
     const adapter = new UserAdapter()
     adapter.getUserInfo().then(json => this.setState({username: json.username}))
+     navigator.geolocation.getCurrentPosition(location => {
+      this.setState({coordinates: `${location.coords.latitude},${location.coords.longitude}`})
+    })
   }
   
   render() {
@@ -40,6 +52,7 @@ class Profile extends React.Component {
               <input type="text" value={this.state.searchTerm} onChange={this.handleChange}/>
               <input type="submit"/>
             </form>
+            <button onClick={this.handleDetectLocation}>Search Off Current Location</button>
           </div>
         </div>
       </div>

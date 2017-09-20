@@ -9,7 +9,13 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=imperial&APPID=48dbda7652d5e2242d78ded92f4dea55`).then(response => response.json()).then(json => this.setState({weatherData: json}))
+    if (isNaN(this.props.location.charAt(0))) {
+      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=imperial&APPID=48dbda7652d5e2242d78ded92f4dea55`).then(response => response.json()).then(json => this.setState({weatherData: json}))
+    }
+    else {
+      const latlon = this.props.location.split(",")
+      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latlon[0]}&lon=${latlon[1]}&units=imperial&APPID=48dbda7652d5e2242d78ded92f4dea55`).then(response => response.json()).then(json => this.setState({weatherData: json}))
+    }
   }
 
   render() {
