@@ -2,6 +2,7 @@ import React from 'react'
 import TripAdapter from '../adapters/TripAdapter'
 import Weather from './Weather'
 import Activity from './Activity'
+import MapContainer from './MapContainer'
 
 class Itinerary extends React.Component {
   constructor() {
@@ -40,10 +41,30 @@ class Itinerary extends React.Component {
     })
   }
 
+  desiredAddresses = () => {
+    var addresses = [];
+    for (let i = 0; i < 4; i++) {
+      for (let key in this.state.activities[i]) {
+          if (key ==="coordinates") {
+            addresses.push(this.state.activities[i][key]);
+          }
+      }
+    }
+    for (let i = 0; i < 4; i++) {
+      for (let key in this.state.restaurants[i]) {
+        if (key==="coordinates") {
+          addresses.push(this.state.restaurants[i][key]);
+        }
+      }
+    }
+    return addresses
+  }
 
   render() {
-    console.log(this.props.data.match.params.location)
-    console.log(this.state)
+    // console.log(this.props.data.match.params.location)
+    // console.log(this.state)
+    var addresses = [];
+    (this.state.activities.length > 0 ? addresses = this.desiredAddresses() : null)
     return(
       <div id="full-width">
         <div id="left-half">
@@ -57,7 +78,8 @@ class Itinerary extends React.Component {
           </div>
         </div>
         <div id="right-half">
-          <Weather location={this.props.data.match.params.location}/>
+          <div><Weather location={this.props.data.match.params.location}/></div>
+          <div><MapContainer addresses={addresses}/></div>
         </div>
       </div>
     )

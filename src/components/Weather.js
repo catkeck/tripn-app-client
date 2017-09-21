@@ -39,7 +39,8 @@ class Weather extends React.Component {
   render() {
     console.log(this.state.weatherData)
     return(
-      <div>
+
+      <div className="Weather">
         {this.state.weatherData.main ? <div><img src={this.state.weatherImg} alt=""/><h1>{this.state.weatherData.main.temp} degrees F/{this.convertToCelsius(this.state.weatherData.main.temp).toFixed(2)} degrees C</h1><h2>{this.state.weatherData.main.humidity} Humidity</h2><p>{this.state.weatherData.temp_min}</p><p>{this.state.weatherData.temp_max}</p><p>{this.state.weatherData.weather[0].main}({this.state.weatherData.weather[0].description})</p></div> : null}
 
       </div>

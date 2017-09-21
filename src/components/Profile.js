@@ -44,7 +44,7 @@ class Profile extends React.Component {
     return (
       <div id="full-width">
         <div id="left-half">
-          {this.state.username}
+          <h3>Welcome {this.state.username}</h3>
         </div>
         <div id="right-half">
           <div id="search-box">
