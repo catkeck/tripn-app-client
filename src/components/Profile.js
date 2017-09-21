@@ -47,7 +47,7 @@ class Profile extends React.Component {
           {this.state.username}
         </div>
         <div id="right-half">
-          <div className="search-form">
+          <div id="search-box">
             <form onSubmit={this.handleSubmit}>
               <h3> Get Itinerary </h3>
               <input type="text" value={this.state.searchTerm} onChange={this.handleChange}/>

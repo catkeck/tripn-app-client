@@ -8,8 +8,12 @@ const NavBar = () => {
   }                      
   return (  
     <div>                      
-      <div className="logo"><h1><Link to={`/`}>Tripn</Link></h1></div>
-       {localStorage["token"] ? <div className="auth-links"><Link to={'/profile'}>My Profile</Link><Link to={'/'} onClick={handleLogout}> Log Out</Link></div> : <div><Link to={'/signup'}>Sign Up</Link> <Link to={'/login'}>Log In</Link></div>}
+      <div className="logo">
+        <h1>
+          <Link to={`/`}>Tripn</Link>
+        </h1>
+      </div>
+       {localStorage["token"] ? <div className="auth-links"><Link to={'/profile'}>My Profile </Link><Link to={'/'} onClick={handleLogout}>| Log Out</Link></div> : <div className="auth-links"><Link to={'/signup'}>Sign Up </Link><Link to={'/login'}>| Log In</Link></div>}
       <h1></h1>
     </div>
   )
