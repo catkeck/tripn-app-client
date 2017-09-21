@@ -10,7 +10,8 @@ class MapContainer extends React.Component {
     }
   }
 
-  setLocation = () => {
+  componentWillMount(){
+    console.log("ComponentWillMount",this.props)
     this.setState({
       lat: this.props.addresses[0].latitude,
       lon: this.props.addresses[0].longitude
@@ -18,23 +19,22 @@ class MapContainer extends React.Component {
   }
 
   render() {
-    (this.props.address ? this.setLocation() : null)
     var markers = [];
     (this.props.addresses.length > 0 ? (markers = this.props.addresses.map(address =>
-        <Marker
-          title={'The marker`s title will appear as a tooltip.'}
-          name={'SOMA'}
-          position={{lat: address.latitude, lng: address.longitude}} />)) : null )
+      <Marker
+        title={'The marker`s title will appear as a tooltip.'}
+        name={'SOMA'}
+        position={{lat: address.latitude, lng: address.longitude}} />)) : null )
     return (
-        <Map google={this.props.google}  
+       (this.props.addresses[0] ? <Map google={this.props.google}  
           style={{width: '40%', height: '50%', position: 'relative'}}  initialCenter={{
             lat: this.state.lat,
             lng: this.state.lon
           }} 
-          zoom={20}>
+          zoom={10}>
         {markers}
 
-      </Map>
+      </Map> : null)
 
     );
   }

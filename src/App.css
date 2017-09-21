@@ -188,6 +188,7 @@ button.social-signin:active {
 
 .activity {
   width: 100%;
+  position: relative;
 }
 
 .App-header {
@@ -195,3 +196,12 @@ button.social-signin:active {
   padding-bottom: 20px;
   border-bottom-color: black;
 }
+/*
+.list-images {
+  float: left;
+}
+
+.activity-info {
+  float: right;
+}*/
+   

@@ -3,57 +3,40 @@ import TripAdapter from '../adapters/TripAdapter'
 import Weather from './Weather'
 import Activity from './Activity'
 import MapContainer from './MapContainer'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as ItineraryActions from '../actions/itinerary'
+import {removeActivity, fetchActivities, removeRestaurant, fetchRestaurants} from '../actions/itinerary'
 
 class Itinerary extends React.Component {
-  constructor() {
-    super()
-    this.state={
-      activities: [],
-      restaurants: []
-    }
-  }
 
   componentDidMount() {
-    const adapter = new TripAdapter();
-    adapter.getActivities(this.props.data.match.params.location).then(json => this.setState({activities: json.businesses.businesses}))
-    adapter.getRestaurants(this.props.data.match.params.location).then(json => this.setState({restaurants: json.restaurants.businesses}))
-  }
-
-  filterWeather() {
-
+    console.log(this.props.data)
+    this.props.fetchActivities(this.props.data.match.params.location)
+    this.props.fetchRestaurants(this.props.data.match.params.location)
   }
 
   deleteActivity = (activity) => {
-    const filteredActivities = this.state.activities.filter((element) => {
-      return element.name !== activity
-    })
-    this.setState({
-      activities: filteredActivities
-    })
+    this.props.removeActivity(activity)
   }
 
   deleteRestaurant = (restaurant) => {
-    const filteredRestaurants = this.state.restaurants.filter((element) => {
-      return element.name !== restaurant
-    })
-    this.setState({
-      restaurants: filteredRestaurants
-    })
+    this.props.removeRestaurant(restaurant)
   }
 
   desiredAddresses = () => {
-    var addresses = [];
+    let addresses = [];
     for (let i = 0; i < 4; i++) {
-      for (let key in this.state.activities[i]) {
+      for (let key in this.props.activities[i]) {
           if (key ==="coordinates") {
-            addresses.push(this.state.activities[i][key]);
+            addresses.push(this.props.activities[i][key]);
           }
       }
     }
     for (let i = 0; i < 4; i++) {
-      for (let key in this.state.restaurants[i]) {
+      for (let key in this.props.restaurants[i]) {
         if (key==="coordinates") {
-          addresses.push(this.state.restaurants[i][key]);
+          addresses.push(this.props.restaurants[i][key]);
         }
       }
     }
@@ -61,25 +44,23 @@ class Itinerary extends React.Component {
   }
 
   render() {
-    // console.log(this.props.data.match.params.location)
-    // console.log(this.state)
     var addresses = [];
-    (this.state.activities.length > 0 ? addresses = this.desiredAddresses() : null)
+    (this.props.activities.length > 0 ? addresses = this.desiredAddresses() : null)
     return(
       <div id="full-width">
         <div id="left-half">
           <div className="itinerary">
             <h1> Itinerary </h1>
-            {this.state.activities.length > 0 ? this.state.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
+            {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
           </div>
           <div className="food">
             <h1> Food </h1>
-            {this.state.restaurants.length > 0 ? this.state.restaurants.slice(0,3).map((business,index) => <Activity deleteActivity={this.deleteRestaurant} key={index} name={business.name} data={business}/>) : null}
+            {this.props.restaurants.length > 0 ? this.props.restaurants.slice(0,3).map((business,index) => <Activity deleteActivity={this.deleteRestaurant} key={index} name={business.name} data={business}/>) : null}
           </div>
         </div>
         <div id="right-half">
           <div><Weather location={this.props.data.match.params.location}/></div>
-          <div><MapContainer addresses={addresses}/></div>
+          <div> {addresses.length> 0? <MapContainer addresses={addresses}/>: <h1>LOADING</h1>}</div>
         </div>
       </div>
     )
@@ -87,4 +68,15 @@ class Itinerary extends React.Component {
 
 }
 
-export default Itinerary
+function mapStateToProps(state) {
+  return {
+    activities: state.activities,
+    restaurants: state.restaurants
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ItineraryActions, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Itinerary)

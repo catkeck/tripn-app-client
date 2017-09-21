@@ -40,7 +40,7 @@ class Profile extends React.Component {
   }
   
   render() {
-    console.log(this.state.username)
+    // console.log(this.state.username)
     return (
       <div id="full-width">
         <div id="left-half">

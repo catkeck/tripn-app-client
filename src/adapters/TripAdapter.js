@@ -1,9 +1,10 @@
 export default class TripAdapter {
-  constructor() {
-    this.baseUrl = 'http://localhost:3000/api/v1/'    
+
+  static baseUrl() {
+    return 'http://localhost:3000/api/v1/'   
   }
 
-  getActivities(location) {
+  static getActivities(location) {
     const activityParams = {
       method: 'post',
       headers: {
@@ -12,12 +13,12 @@ export default class TripAdapter {
       },
       body: JSON.stringify({searchTerm: location})
     }
-    return fetch(`${this.baseUrl}/activities`, activityParams)
+    return fetch(`${TripAdapter.baseUrl()}/activities`, activityParams)
       .then(resp => resp.json())
 
   }
 
-  getRestaurants(location) {
+  static getRestaurants(location) {
     const restaurantParams = {
       method: 'post',
       headers: {
@@ -26,7 +27,7 @@ export default class TripAdapter {
       },
       body: JSON.stringify({searchTerm: location})
     }
-    return fetch(`${this.baseUrl}/restaurants`, restaurantParams)
+    return fetch(`${TripAdapter.baseUrl()}/restaurants`, restaurantParams)
       .then(resp => resp.json())
 
   }

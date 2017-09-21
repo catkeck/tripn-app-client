@@ -4,7 +4,13 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux'
+import itineraryReducer from './reducers/itineraryReducer'
+import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 
+const store = createStore(itineraryReducer,composeWithDevTools(applyMiddleware(thunk)))
 
-ReactDOM.render(<Router><Route path="/" component={App}/></Router>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><Router><Route path="/" component={App}/></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -1,4 +1,7 @@
 import React from 'react'
+import weatherReducer from '../reducers/weatherReducer'
+
+// const store = createStore(weatherReducer)
 
 class Weather extends React.Component {
   constructor() {
@@ -11,11 +14,11 @@ class Weather extends React.Component {
 
   componentDidMount() {
     if (isNaN(this.props.location.charAt(0))) {
-      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=imperial&APPID=48dbda7652d5e2242d78ded92f4dea55`).then(response => response.json()).then(json => this.setState({weatherData: json}))
+      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=imperial&APPID=600c24f64be0542ee3eea23ad03ee915`).then(response => response.json()).then(json => this.setState({weatherData: json}))
     }
     else {
       const latlon = this.props.location.split(",")
-      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latlon[0]}&lon=${latlon[1]}&units=imperial&APPID=48dbda7652d5e2242d78ded92f4dea55`).then(response => response.json()).then(json => this.setState({weatherData: json}))
+      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latlon[0]}&lon=${latlon[1]}&units=imperial&APPID=600c24f64be0542ee3eea23ad03ee915`).then(response => response.json()).then(json => this.setState({weatherData: json}))
     }
   }
 
@@ -37,11 +40,11 @@ class Weather extends React.Component {
 
 
   render() {
-    console.log(this.state.weatherData)
+    // console.log(this.state)
     return(
 
       <div className="Weather">
-        {this.state.weatherData.main ? <div><img src={this.state.weatherImg} alt=""/><h1>{this.state.weatherData.main.temp} degrees F/{this.convertToCelsius(this.state.weatherData.main.temp).toFixed(2)} degrees C</h1><h2>{this.state.weatherData.main.humidity} Humidity</h2><p>{this.state.weatherData.temp_min}</p><p>{this.state.weatherData.temp_max}</p><p>{this.state.weatherData.weather[0].main}({this.state.weatherData.weather[0].description})</p></div> : null}
+        {this.state.weatherData.main ? <div><img src={this.state.weatherImg} alt=""/><h1>{this.state.weatherData.main.temp} &#8457; / {this.convertToCelsius(this.state.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{this.state.weatherData.main.humidity} Humidity</h2><p>{this.state.weatherData.temp_min}</p><p>{this.state.weatherData.temp_max}</p><p>{this.state.weatherData.weather[0].main}({this.state.weatherData.weather[0].description})</p></div> : null}
 
       </div>
     )

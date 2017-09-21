@@ -35,7 +35,7 @@ class Signup extends React.Component {
           this.setState({username: "", password: ""})
           
           localStorage.setItem("token", user.jwt)
-          console.log(this.props.history)
+          // console.log(this.props.history)
           this.props.history.replace("/")
         })
       this.props.handleLoginAndSignup()
