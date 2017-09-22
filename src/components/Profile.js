@@ -1,71 +1,77 @@
 import React from 'react'
 import UserAdapter from '../adapters/UserAdapter'
 import TripsContainer from './TripsContainer'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as ProfileActions from '../actions/profile'
+import {getUserData, getCurrentPosition, setSearchTerm} from '../actions/profile'
+
 
 class Profile extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      username: "",
-      coordinates: "",
-      searchTerm: "",
-      trips: [],
-      showButton: false
-    }
-  }
 
   handleChange = (event) => {
-    this.setState({
-      searchTerm: event.target.value 
-    })
+    this.props.setSearchTerm(event.target.value)
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.history.history.push(`/search/${this.state.searchTerm}`)
+    this.props.history.history.push(`/search/${this.props.searchTerm}`)
   }
 
-  // latitude,longitude
 
   handleDetectLocation = (event) => {
     event.preventDefault();
-    this.props.history.history.push(`/search/${this.state.coordinates}`)
+    this.props.history.history.push(`/search/${this.props.coordinates}`)
   }
 
 
   componentDidMount() {
-    UserAdapter.getUserInfo().then(json => this.setState({username: json.username, trips: json.trips}))
-    navigator.geolocation.getCurrentPosition(location => {
-      this.setState({coordinates: `${location.coords.latitude},${location.coords.longitude}`, showButton: true})
-    })
+    UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
+    this.props.getCurrentPosition();
   }
   
   render() {
-    console.log(this.state.trips)
+    console.log(this.props)
     return (
       <div id="full-width">
         <div id="top-section">
           <div id="left-half">
-            <h3>Welcome {this.state.username}</h3>
+            <h3>Welcome {this.props.username}</h3>
           </div>
           <div id="right-half">
             <div id="search-box">
               <form onSubmit={this.handleSubmit}>
                 <h3> Get Itinerary </h3>
-                <input type="text" value={this.state.searchTerm} onChange={this.handleChange}/>
+                <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
                 <input type="submit"/>
               </form>
              
-              {this.state.showButton ? <button onClick={this.handleDetectLocation}>Search Off Current Location</button> : null }
+              {this.props.showButton ? <button onClick={this.handleDetectLocation}>Search Off Current Location</button> : null }
             </div>
           </div>
         </div>
         <div id="bottom-section">
-          <TripsContainer trips={this.state.trips}/>
+          <TripsContainer trips={this.props.trips}/>
         </div>
       </div>
     )
   }
 }
 
-export default Profile
+
+function mapStateToProps(state) {
+  return {
+    username: state.profile.username,
+    coordinates: state.profile.coordinates,
+    searchTerm: state.profile.searchTerm,
+    trips: state.profile.trips,
+    showButton: state.profile.showButton,
+    isLoading: state.profile.isLoading
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ProfileActions, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)

@@ -11,7 +11,17 @@ export function removeActivity(activity){
 export function fetchActivities(location) {
   return function(dispatch) {
     dispatch({type:"FETCHING_ACTIVITIES"})
-    TripAdapter.getActivities(location)
+    TripAdapter.getActivities(location, 0)
+      .then(activities => {
+        dispatch({type: "FETCHED_ACTIVITIES", payload: activities.businesses.businesses})
+      })
+  }
+}
+
+export function fetchIndoorActivities(location) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_ACTIVITIES"})
+    TripAdapter.getIndoorActivities(location, 0)
       .then(activities => {
         dispatch({type: "FETCHED_ACTIVITIES", payload: activities.businesses.businesses})
       })
@@ -28,7 +38,7 @@ export function removeRestaurant(restaurant){
 export function fetchRestaurants(location) {
   return function(dispatch) {
     dispatch({type:"FETCHING_RESTAURANTS"})
-    TripAdapter.getRestaurants(location)
+    TripAdapter.getRestaurants(location, 0)
       .then(restaurants => {
         dispatch({type: "FETCHED_RESTAURANTS", payload: restaurants.restaurants.businesses})
       })
@@ -40,7 +50,8 @@ export function fetchStringWeather(location) {
     dispatch({type: "FETCHING_WEATHER"})
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&APPID=600c24f64be0542ee3eea23ad03ee915`)
       .then(response => response.json())
-      .then(weather => {
+      .then(
+            weather => {
         dispatch({type: "FETCHED_WEATHER", payload: weather
         })
       })

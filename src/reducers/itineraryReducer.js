@@ -1,7 +1,6 @@
-function itineraryReducer(state = {activities: [], restaurants: [], weather: {},isLoading: false}, action) {
+function itineraryReducer(state = {activities: [], restaurants: [], weather: {}, isLoading: false}, action) {
   switch(action.type) {
     case "FETCHED_ACTIVITIES":
-      console.log(action.payload)
       return Object.assign({}, state, { activities: action.payload, isLoading: false } )
     case "FETCHING_ACTIVITIES":
       return Object.assign({}, state, { isLoading: true})
@@ -16,7 +15,6 @@ function itineraryReducer(state = {activities: [], restaurants: [], weather: {},
     case "FETCHING_WEATHER":
       return Object.assign({}, { isLoading: true })
     case "FETCHED_WEATHER":
-    console.log("REDUCER WEATHER", action.payload)
       return Object.assign({}, state, { weather: action.payload, isLoading: false })
     default:
       return state

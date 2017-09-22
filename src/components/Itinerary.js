@@ -6,19 +6,33 @@ import MapContainer from './MapContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather} from '../actions/itinerary'
+import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather} from '../actions/itinerary'
 
 class Itinerary extends React.Component {
 
   componentDidMount() {
     const location = this.props.data.match.params.location
-    this.props.fetchActivities(location)
-    this.props.fetchRestaurants(location)
+    this.props.fetchRestaurants(location, 0)
     if (isNaN(location.charAt(0))) {
       this.props.fetchStringWeather(location)
     } else {
       this.props.fetchCoordinateWeather(location)
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const location = this.props.data.match.params.location
+    if (this.props.weatherData!= nextProps.weatherData && nextProps.weatherData!=undefined){
+      if (nextProps.weatherData.weather[0].description.includes("rain")) {
+        this.props.fetchIndoorActivities(location, 0)
+      } else {
+        this.props.fetchActivities(location, 0)
+      }
+    }
+  }
+
+  filterForNewActivitesRestaurants = () => {
+
   }
 
   deleteActivity = (activity) => {
@@ -95,9 +109,9 @@ class Itinerary extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    activities: state.activities,
-    restaurants: state.restaurants,
-    weatherData: state.weather
+    activities: state.itinerary.activities,
+    restaurants: state.itinerary.restaurants,
+    weatherData: state.itinerary.weather
   }
 }
 

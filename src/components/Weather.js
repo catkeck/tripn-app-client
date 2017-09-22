@@ -34,7 +34,7 @@ class Weather extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    weatherData: state.weather
+    weatherData: state.itinerary.weather
   }
 }
 

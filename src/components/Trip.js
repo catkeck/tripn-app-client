@@ -6,7 +6,7 @@ class Trip extends React.Component {
     console.log(this.props)
     return (
       <div id="activity">
-        {this.props.tripData[0]}
+        {this.props.tripData[0].split("T")[0]}
         {this.props.tripData[1].map(activity => <p>{activity.activity}</p>)}
       </div>
     )
