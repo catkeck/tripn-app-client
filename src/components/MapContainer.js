@@ -1,5 +1,5 @@
 import React from 'react'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 class MapContainer extends React.Component {
   constructor() {
@@ -11,7 +11,6 @@ class MapContainer extends React.Component {
   }
 
   componentWillMount(){
-    console.log("ComponentWillMount",this.props)
     this.setState({
       lat: this.props.addresses[0].latitude,
       lon: this.props.addresses[0].longitude

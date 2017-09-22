@@ -13,7 +13,7 @@ export default class TripAdapter {
       },
       body: JSON.stringify({searchTerm: location})
     }
-    return fetch(`${TripAdapter.baseUrl()}/activities`, activityParams)
+    return fetch(`${TripAdapter.baseUrl()}activities`, activityParams)
       .then(resp => resp.json())
 
   }
@@ -32,4 +32,32 @@ export default class TripAdapter {
 
   }
 
+  static getIndoorActivities(location) {
+    const activityParams = {
+      method: 'post',
+      headers: {
+        'Content-Type':'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({searchTerm: location})
+    }
+    return fetch(`${TripAdapter.baseUrl()}/indoor_activities`, activityParams)
+      .then(resp => resp.json())
+  }
+
+
+  static saveTrip(trip) {
+    console.log(trip)
+    const token = localStorage.getItem("token")
+    const tripSaveParams = {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({trip: trip})
+    }
+    fetch(`${TripAdapter.baseUrl()}/schedules/new`, tripSaveParams)
+  }
 }

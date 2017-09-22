@@ -1,10 +1,10 @@
 export default class UserAdapter {
 
-  constructor() {
-      this.baseUrl = 'http://localhost:3000/api/v1/user'   
+  static baseUrl() {
+    return 'http://localhost:3000/api/v1/user'   
   }
 
-  getUserInfo() {
+  static getUserInfo() {
     const token =localStorage.getItem("token")
     const params = {
       method: 'GET',
@@ -15,7 +15,7 @@ export default class UserAdapter {
       }
     }
     
-    return fetch(this.baseUrl, params)
+    return fetch(UserAdapter.baseUrl(), params)
       .then(resp => resp.json())
   }
 }
