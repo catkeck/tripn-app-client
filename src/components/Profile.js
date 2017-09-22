@@ -40,9 +40,11 @@ class Profile extends React.Component {
       <div id="full-width">
         <div id="top-section">
           <div id="left-half">
-            <h3>Welcome {this.props.username}</h3>
-            <img src={this.props.file} alt=""/>
-            <FileBase64 multiple={ false } onDone={ this.getFiles}/>
+            <div id="search-box">
+              <h3>Welcome {this.props.username}</h3>
+              <img src={this.props.file} alt=""/>
+              <FileBase64 multiple={ false } onDone={ this.getFiles}/>
+            </div>
           </div>
           <div id="right-half">
             <div id="search-box">

@@ -188,6 +188,7 @@ input[type="submit"]:active {
   left: 0;
   box-sizing: border-box;
   padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
    
 #top-section {
@@ -198,6 +199,7 @@ input[type="submit"]:active {
 #bottom-section{
   float: left;
   width: 100%;
+  padding-left: 100px;
 }
 
 button {
@@ -211,6 +213,7 @@ button {
   font-weight: 500;
   transition: 0.2s ease;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 button:hover,
