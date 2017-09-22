@@ -4,8 +4,8 @@ import TripsContainer from './TripsContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
-import {getUserData, getCurrentPosition, setSearchTerm} from '../actions/profile'
-
+import {getUserData, getCurrentPosition, setSearchTerm, setProfileImage} from '../actions/profile'
+import FileBase64 from 'react-file-base64'
 
 class Profile extends React.Component {
 
@@ -24,19 +24,25 @@ class Profile extends React.Component {
     this.props.history.history.push(`/search/${this.props.coordinates}`)
   }
 
-
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
     this.props.getCurrentPosition();
   }
   
+  getFiles = (file) => {
+    this.props.setProfileImage(file);
+    UserAdapter.saveUserImage(file);
+  }
+
   render() {
-    console.log(this.props)
+    console.log(this.props.trips)
     return (
       <div id="full-width">
         <div id="top-section">
           <div id="left-half">
             <h3>Welcome {this.props.username}</h3>
+            <img src={this.props.file} alt=""/>
+            <FileBase64 multiple={ false } onDone={ this.getFiles}/>
           </div>
           <div id="right-half">
             <div id="search-box">
@@ -45,8 +51,7 @@ class Profile extends React.Component {
                 <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
                 <input type="submit"/>
               </form>
-             
-              {this.props.showButton ? <button onClick={this.handleDetectLocation}>Search Off Current Location</button> : null }
+              {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>Search Current Location</button></div> : null }
             </div>
           </div>
         </div>
@@ -66,7 +71,8 @@ function mapStateToProps(state) {
     searchTerm: state.profile.searchTerm,
     trips: state.profile.trips,
     showButton: state.profile.showButton,
-    isLoading: state.profile.isLoading
+    isLoading: state.profile.isLoading,
+    activities: state.profile.activities
   }
 }
 

@@ -31,10 +31,6 @@ class Itinerary extends React.Component {
     }
   }
 
-  filterForNewActivitesRestaurants = () => {
-
-  }
-
   deleteActivity = (activity) => {
     this.props.removeActivity(activity)
   }
@@ -66,20 +62,21 @@ class Itinerary extends React.Component {
     event.preventDefault()
     const tripParams = {
       activities: this.props.activities.slice(0,4),
-      restaurants: this.props.restaurants.slice(0,3)
+      restaurants: this.props.restaurants.slice(0,3),
+      location: this.props.data.match.params.location
     }
     TripAdapter.saveTrip(tripParams)
   }
 
   render() {
-    console.log("render itinerary", this.props)
     if (this.props.activities && this.props.restaurants) {
+      console.log(this.props.trips)
       var addresses = [];
       (this.props.activities.length > 0 ? addresses = this.desiredAddresses() : null)
       return(
         <div id="full-width">
-         <div><button onClick={this.handleSave}>Save</button></div>
           <div id="left-half">
+            <div><button onClick={this.handleSave}>Save Itinerary</button></div>
             <div className="itinerary">
               <h1> Itinerary </h1>
               {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
@@ -111,7 +108,8 @@ function mapStateToProps(state) {
   return {
     activities: state.itinerary.activities,
     restaurants: state.itinerary.restaurants,
-    weatherData: state.itinerary.weather
+    weatherData: state.itinerary.weather,
+    trips: state.profile.trips
   }
 }
 

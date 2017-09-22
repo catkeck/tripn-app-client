@@ -18,4 +18,18 @@ export default class UserAdapter {
     return fetch(UserAdapter.baseUrl(), params)
       .then(resp => resp.json())
   }
+
+  static saveUserImage(image) {
+    const token = localStorage.getItem("token")
+    const imageSaveParams = {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({image: image})
+    }
+    fetch(`${UserAdapter.baseUrl()}/edit`, imageSaveParams)
+  }
 }

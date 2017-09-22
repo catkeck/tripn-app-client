@@ -25,4 +25,9 @@ export function setSearchTerm(searchTerm) {
   }
 }
 
-
+export function setProfileImage(image) {
+  return {
+    type: "SET_PROFILE_IMAGE",
+    payload: image
+  }
+}
