@@ -98,7 +98,7 @@ class Itinerary extends React.Component {
           </div>
           <div id="right-half">
             <Weather />
-            <div> {addresses.length> 0? <MapContainer addresses={addresses} initialLat={addresses[0].latitude} initialLon={addresses[0].longitude} zoom={10} width={'40%'} height={'50%'}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+            <div> {addresses.length> 0? <MapContainer addresses={addresses} initialLat={addresses[0].latitude} initialLon={addresses[0].longitude} zoom={10} width={'20%'} height={'50%'}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
           </div>
         </div>
       )

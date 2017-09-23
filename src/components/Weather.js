@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-class Weather extends React.Component {
+const Weather = (props) => {
 
-  convertToCelsius(fahrenheit) {
+  const convertToCelsius = (fahrenheit) => {
     return (fahrenheit-32)*5/9
   }
 
@@ -16,21 +16,15 @@ class Weather extends React.Component {
   // //   return weatherIcon
   // }
 
+  return(
 
-  render() {
-    console.log(this.props)
-    // const getWeatherImage = this.weatherImage();
-    // console.log(getWeatherImage)
-    return(
+    <div className="Weather">
+      {props.weatherData.main ? <div><h1>{props.weatherData.main.temp} &#8457; / {convertToCelsius(props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{props.weatherData.main.humidity} Humidity</h2><p>{props.weatherData.temp_min}</p><p>{props.weatherData.temp_max}</p><p>{props.weatherData.weather[0].main}({props.weatherData.weather[0].description})</p></div> : null}
 
-      <div className="Weather">
-        {this.props.weatherData.main ? <div><h1>{this.props.weatherData.main.temp} &#8457; / {this.convertToCelsius(this.props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{this.props.weatherData.main.humidity} Humidity</h2><p>{this.props.weatherData.temp_min}</p><p>{this.props.weatherData.temp_max}</p><p>{this.props.weatherData.weather[0].main}({this.props.weatherData.weather[0].description})</p></div> : null}
-
-      </div>
-    )
-  }
-
+    </div>
+  )
 }
+
 
 function mapStateToProps(state) {
   return {

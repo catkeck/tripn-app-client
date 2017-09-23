@@ -109,7 +109,7 @@ class Profile extends React.Component {
           </div>
             <div id="bottom-section">
             <h2> Saved Itineraries </h2>
-              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'80%'} height={'20%'}/>
+              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'40%'} height={'20%'}/>
             </div>
             <TripsContainer trips={this.props.trips}/>
         </div>

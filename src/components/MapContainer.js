@@ -4,8 +4,6 @@ import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 class MapContainer extends React.Component {
 
   render() {
-    console.log(this.props.addresses)
-    debugger
     var markers = [];
     ((this.props.addresses&&this.props.addresses.length>0)?(markers = this.props.addresses.map(address =>
       <Marker
@@ -14,7 +12,7 @@ class MapContainer extends React.Component {
         position={{lat: address.latitude, lng: address.longitude}} />)) : null )
     return (
        (this.props.addresses&&this.props.addresses[0] ? <div id="map-container"><Map google={this.props.google}  
-          style={{width: '80%', height: '70%', position: 'relative'}}  initialCenter={{
+          style={{width: '40%', height: '70%', position: 'relative'}}  initialCenter={{
             lat: this.props.initialLat,
             lng: this.props.initialLon
           }} 
