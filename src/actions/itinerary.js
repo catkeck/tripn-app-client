@@ -71,5 +71,10 @@ export function fetchCoordinateWeather(location) {
   }
 }
 
-// export function
+export function filterActivities(activityNames) {
+    return {
+    type: "FILTER_ACTIVITIES",
+    payload: activityNames
+  }
+}
   

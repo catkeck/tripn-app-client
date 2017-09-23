@@ -6,7 +6,7 @@ import MapContainer from './MapContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather} from '../actions/itinerary'
+import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities} from '../actions/itinerary'
 
 class Itinerary extends React.Component {
 
@@ -22,13 +22,22 @@ class Itinerary extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const location = this.props.data.match.params.location
-    if (this.props.weatherData!= nextProps.weatherData && nextProps.weatherData!=undefined){
+    if (this.props.weatherData!== nextProps.weatherData && nextProps.weatherData!=undefined){
       if (nextProps.weatherData.weather[0].description.includes("rain")) {
         this.props.fetchIndoorActivities(location, 0)
       } else {
         this.props.fetchActivities(location, 0)
       }
     }
+     if (this.props.filtered!==true && this.props.trips!==undefined && nextProps.activities && nextProps.activities.length > 0) {
+       console.log("filtering")
+       this.filterActivities(this.props.trips)
+     }
+
+  }
+
+  filterActivities = () => {
+    this.props.filterActivities(this.props.trips)
   }
 
   deleteActivity = (activity) => {
@@ -65,12 +74,13 @@ class Itinerary extends React.Component {
       restaurants: this.props.restaurants.slice(0,3),
       location: this.props.data.match.params.location
     }
+    console.log(this.props.tripParams)
     TripAdapter.saveTrip(tripParams)
   }
 
   render() {
+    console.log(this.props.activities)
     if (this.props.activities && this.props.restaurants) {
-      console.log(this.props.trips)
       var addresses = [];
       (this.props.activities.length > 0 ? addresses = this.desiredAddresses() : null)
       return(
@@ -88,16 +98,13 @@ class Itinerary extends React.Component {
           </div>
           <div id="right-half">
             <Weather />
-            <div> {addresses.length> 0? <MapContainer addresses={addresses}/>: <h1>LOADING</h1>}</div>
-
+            <div> {addresses.length> 0? <MapContainer addresses={addresses} initialLat={addresses[0].latitude} initialLon={addresses[0].longitude} zoom={10} width={'40%'} height={'50%'}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
           </div>
-          
         </div>
-        
       )
     } else {
       return (
-        <div>Loading...</div>
+        <div><img src="Infinity.svg" alt=""/></div>
       )
     }
   }
@@ -109,7 +116,9 @@ function mapStateToProps(state) {
     activities: state.itinerary.activities,
     restaurants: state.itinerary.restaurants,
     weatherData: state.itinerary.weather,
-    trips: state.profile.trips
+    trips: state.profile.trips,
+    filtered: state.itinerary.filtered,
+    isLoading: state.itinerary.isLoading
   }
 }
 

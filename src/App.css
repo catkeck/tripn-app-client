@@ -213,7 +213,7 @@ button {
   font-weight: 500;
   transition: 0.2s ease;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  background: #16a085
 }
 
 button:hover,
@@ -231,3 +231,20 @@ button:active {
   margin-top: 10px;
 }
 
+#slider {
+    opacity:1;
+    transition: opacity 1s; 
+}
+
+#slider.fadeOut {
+  opacity:0;
+}
+
+.react-selectize-control {
+  height:100px;
+}
+
+#map-container {
+  width: 100%;
+  padding-bottom: 50%;
+}

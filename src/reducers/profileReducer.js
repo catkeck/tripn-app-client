@@ -3,6 +3,7 @@ function profileReducer(state = {username: "", coordinates: "", searchTerm: "", 
     case "FETCHING_USER_DATA":
       return Object.assign({}, state, {isLoading: true})
     case "FETCHED_USER_DATA": 
+    console.log("in profileReducer",action.payload.activities)
       return Object.assign({}, state, {username: action.payload.username, trips: action.payload.trips, file: action.payload.image, activities: action.payload.activities, isLoading: false })
     case "FETCHING_POSITION":
       return Object.assign({}, state, {isLoading: true})
