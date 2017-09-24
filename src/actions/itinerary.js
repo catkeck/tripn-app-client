@@ -77,4 +77,29 @@ export function filterActivities(activityNames) {
     payload: activityNames
   }
 }
-  
+ 
+export function addActivities(location, index) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_ACTIVITIES"})
+    TripAdapter.getActivities(location, index)
+      .then(activities => {
+        dispatch({type: "ADD_ACTIVITIES", payload: activities.businesses.businesses})
+      })
+  }
+} 
+
+export function addRestaurants(location, index) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_RESTAURANTS"})
+    TripAdapter.getRestaurants(location, index)
+      .then(restaurants => {
+        dispatch({type: "ADD_RESTAURANTS", payload: restaurants.restaurants.businesses})
+      })
+  }
+} 
+
+export function setShuffledActivities(activities) {
+  return {
+    type: "FETCHED_ACTIVITIES", payload: activities
+  }
+}

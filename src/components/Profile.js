@@ -10,6 +10,8 @@ import axios from 'axios'
 import InterestsForm from './InterestsForm'
 import MapContainer from './MapContainer'
 
+const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/codeinfuse/image/upload'
 class Profile extends React.Component {
 
   handleChange = (event) => {
@@ -48,19 +50,19 @@ class Profile extends React.Component {
     }
   }
 
-  handleDrop = files => {
+  handleDrop = (files) => {
     // Push all the axios request promise into a single array
     const uploaders = files.map(file => {
       // Initial FormData
       const formData = new FormData();
       formData.append("file", file);
       formData.append("tags", `codeinfuse, medium, gist`);
-      formData.append("upload_preset", "zqvt4w5a"); // Replace the preset name with your own
+      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET); // Replace the preset name with your own
       formData.append("api_key", "811342252365591"); // Replace API key with your own Cloudinary key
       formData.append("timestamp", (Date.now() / 1000) | 0);
       
       // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
-      return axios.post("https://api.cloudinary.com/v1_1/codeinfuse/image/upload", formData, {
+      return axios.post(CLOUDINARY_UPLOAD_URL, formData, {
         headers: { "X-Requested-With": "XMLHttpRequest" },
       }).then(response => {
         const data = response.data;
@@ -88,7 +90,7 @@ class Profile extends React.Component {
                 <img src={this.props.file} alt=""/>
                 <Dropzone 
                   onDrop={this.handleDrop} 
-                  multiple 
+                  multiple={false}
                   accept="image/*" 
                 >
                   <p>Drop your files or click here to upload</p>
@@ -109,7 +111,7 @@ class Profile extends React.Component {
           </div>
             <div id="bottom-section">
             <h2> Saved Itineraries </h2>
-              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'40%'} height={'20%'}/>
+              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'40%'} height={'20%'} profile={true}/>
             </div>
             <TripsContainer trips={this.props.trips}/>
         </div>

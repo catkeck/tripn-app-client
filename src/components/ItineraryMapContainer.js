@@ -1,7 +1,7 @@
 import React from 'react'
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 
-class MapContainer extends React.Component {
+class ItineraryMapContainer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,19 +35,20 @@ class MapContainer extends React.Component {
   render() {
     console.log(this.props)
     var markers = [];
-    ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map(address =>
+    ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map((address, index) =>
         <Marker
-          name={address.activity}
+          name={address.name}
+          key={index}
           onClick={this.onMarkerClick}
-          position={{lat: address.latitude, lng: address.longitude}} 
+          position={{lat: address.coordinates.latitude, lng: address.coordinates.longitude}} 
         />
       )) : null )
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
-        <div id="map-container">
+        <div>
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
-            style={{width: '80%', height: '50%', position: 'relative'}}  
+            style={{width: '40%', height: '60%', position: 'relative'}}  
             initialCenter={{
               lat: this.props.initialLat,
               lng: this.props.initialLon
@@ -69,4 +70,4 @@ class MapContainer extends React.Component {
 
 export default GoogleApiWrapper({
   apiKey: ("AIzaSyCnTv9-CwFlgFUVSAhUh-Acr6-ydPC3GEw")
-})(MapContainer)
+})(ItineraryMapContainer)
