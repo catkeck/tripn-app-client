@@ -119,7 +119,7 @@ class Itinerary extends React.Component {
           </div>
           <div id="right-half">
             <Weather />
-            <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+            <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={this.props.activities[0].coordinates.latitude} initialLon={this.props.activities[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
           </div>
         </div>
       )

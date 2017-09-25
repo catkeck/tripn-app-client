@@ -54,10 +54,6 @@ a:link, a:visited {
   color: black;
 }
 
-.list-images img{
-  width: 40%;
-}
-
 .food {
   float: left;
 }
@@ -166,15 +162,29 @@ input[type="submit"]:active {
   padding: 40px;
 }
 
-.activity {
-  width: 100%;
-  position: relative;
-}
-
 .App-header {
   height: auto;
   padding-bottom: 20px;
   border-bottom-color: black;
+}
+
+.activity {
+  width: 100%;
+  height: 350px;
+  padding-left:10%;
+}
+
+.activity-info {
+  float: left;
+  padding-left: 20px;
+  width: 50%;
+}
+
+.list-images img{
+  width: 40%;
+  max-height: 300px;
+  float: left;
+  text-align: left;
 }
 
 #activity {
@@ -203,7 +213,8 @@ input[type="submit"]:active {
 
 button {
   margin-bottom: 20px;
-  width: 220px;
+  margin-right: 125px;
+  width:80%;
   height: 36px;
   border: none;
   border-radius: 2px;
@@ -212,9 +223,15 @@ button {
   font-weight: 500;
   transition: 0.2s ease;
   cursor: pointer;
-  background: #16a085
+  background: #16a085;
+  float: right;
+
 }
 
+.x-button button {
+  width: 25px;
+  margin-right:50px;
+}
 button:hover,
 button:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -243,8 +260,9 @@ button:active {
   height:100px;
 }
 
-#map-container {
-  width: 100%;
+.map-container {
+  width: 40%;
+  height:200px;
   padding-bottom: 30%;
   padding-left: 10%;
 }

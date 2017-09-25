@@ -45,7 +45,7 @@ class MapContainer extends React.Component {
     const style = { width: this.props.width, height: this.props.height, position: 'relative'}
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
-        <div id="map-container">
+        <div className="map-container">
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
             style={style}  
