@@ -46,7 +46,7 @@ class ItineraryMapContainer extends React.Component {
     const style = { width: this.props.width, height: this.props.height, position: 'relative'}
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
-        <div>
+        <div className="itinerary-map">
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
             style={style} 

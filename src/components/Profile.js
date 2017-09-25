@@ -12,6 +12,7 @@ import MapContainer from './MapContainer'
 
 const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/codeinfuse/image/upload'
+
 class Profile extends React.Component {
 
   handleChange = (event) => {
@@ -108,7 +109,7 @@ class Profile extends React.Component {
             </div>
           </div>
             <div id="bottom-section">
-            <h2> Saved Itineraries </h2>
+              {this.props.trips.length > 0 ? <h2> Saved Itineraries </h2> : null }
               <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'60%'} profile={true}/>
             </div>
             <TripsContainer trips={this.props.trips}/>

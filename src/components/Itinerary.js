@@ -6,7 +6,7 @@ import ItineraryMapContainer from './ItineraryMapContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setFetchedOut, setBadWeather} from '../actions/itinerary'
+import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setFetchedOut, setBadWeather, setLocation} from '../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0
@@ -15,12 +15,14 @@ class Itinerary extends React.Component {
 
   componentDidMount() {
     const LOCATION = this.props.data.match.params.location
+    this.props.fetchActivities(LOCATION, 0)
     this.props.fetchRestaurants(LOCATION, 0)
     if (isNaN(LOCATION.charAt(0))) {
       this.props.fetchStringWeather(LOCATION)
     } else {
       this.props.fetchCoordinateWeather(LOCATION)
     }
+    this.props.setLocation(LOCATION)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,15 +30,15 @@ class Itinerary extends React.Component {
     if (this.props.weatherData!== nextProps.weatherData && nextProps.weatherData!==undefined){
       if (nextProps.weatherData.weather[0].description.includes("rain")) {
         this.props.setBadWeather();
-        this.props.fetchIndoorActivities(LOCATION, 0)
+        this.props.fetchIndoorActivities(this.props.location, 0)
       } else {
-        this.props.fetchActivities(LOCATION, 0)
+        this.props.fetchActivities(this.props.location, 0)
       }
     }
   }
 
   componentWillUpdate(nextProps,nextState) {
-    if (this.props.activities.length > 1 && this.props.activities.length <= 5) {
+    if (this.props.activities && this.props.activities.length > 1 && this.props.activities.length <= 5) {
       loadedActivities+=50
       if (this.props.badWeather) {
         this.props.addIndoorActivities(this.props.data.match.params.location, loadedActivities)
@@ -44,7 +46,7 @@ class Itinerary extends React.Component {
       this.props.addActivities(this.props.data.match.params.location, loadedActivities)
       }
     }
-    if (this.props.restaurants.length > 1 && this.props.restaurants.length <= 5) {
+    if (this.props.restaurants && this.props.restaurants.length > 1 && this.props.restaurants.length <= 5) {
       loadedRestaurants+=50
       this.props.addRestaurants(this.props.data.match.params.location, loadedRestaurants)
     }
@@ -72,7 +74,7 @@ class Itinerary extends React.Component {
     const tripParams = {
       activities: this.props.activities.slice(0,4),
       restaurants: this.props.restaurants.slice(0,3),
-      location: this.props.data.match.params.location
+      location: this.props.location
     }
     TripAdapter.saveTrip(tripParams)
   }
@@ -95,13 +97,19 @@ class Itinerary extends React.Component {
 
 
   render() {
-    console.log(this.props.activities)
-    if (this.props.activities && this.props.restaurants) {
+    if (this.props.activities === undefined) {
+      return (
+        <div id="full-width">
+          <h1> We are sorry but this location is not available to search at this time. </h1>
+        </div>
+      )
+    }
+    else if (this.props.activities && this.props.restaurants) {
       let coordinateLocations = this.coordinateLocations();
       var addresses = [];
       return(
         <div id="full-width">
-          <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
+ 
           <div id="left-half">
             <div className="itinerary">
               <h1> Itinerary </h1>
@@ -121,6 +129,7 @@ class Itinerary extends React.Component {
             <Weather />
             <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={this.props.activities[0].coordinates.latitude} initialLon={this.props.activities[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
           </div>
+          <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
         </div>
       )
     } else {
@@ -141,7 +150,8 @@ function mapStateToProps(state) {
     filtered: state.itinerary.filtered,
     isLoading: state.itinerary.isLoading,
     fetchable: state.itinerary.fetchable,
-    badWeather: state.itinerary.badWeather
+    badWeather: state.itinerary.badWeather,
+    location: state.itinerary.location
   }
 }
 

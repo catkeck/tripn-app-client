@@ -126,3 +126,10 @@ export function setBadWeather() {
     type: "SET_BAD_WEATHER"
   }
 }
+
+export function setLocation(location) {
+  return {
+    type: "SET_LOCATION",
+    payload: location
+  }
+}
