@@ -63,6 +63,7 @@ class Profile extends React.Component {
         const data = response.data;
         const fileURL = data.secure_url // You should store this URL for future references in your app
         UserAdapter.saveUserImage(fileURL)
+        this.forceUpdate()
       })
     });
   }
@@ -101,7 +102,7 @@ class Profile extends React.Component {
           </div>
             <div id="bottom-section">
               {this.props.trips.length > 0 ? <h2> Saved Itineraries </h2> : null }
-              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'60%'} profile={true}/>
+              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'500px'} profile={true}/>
             </div>
             <TripsContainer trips={this.props.trips}/>
         </div>
