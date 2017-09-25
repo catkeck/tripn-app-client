@@ -234,7 +234,7 @@ button {
 
 .x-button button {
   width: 25px;
-  margin-right:50px;
+  margin-right:10px;
 }
 
 button:hover,
@@ -268,8 +268,8 @@ button:active {
 .map-container {
   width: 40%;
   height:200px;
-  padding-bottom: 30%;
-  padding-left: 20%;
+  padding-bottom: 15%;
+  padding-left: 15%;
 }
 
 .itinerary-map {
@@ -296,7 +296,13 @@ button:active {
   padding-bottom: 100px;
 }
 
-.Weather {
+.weather {
   padding-right: 20%;
+  padding-left: 20%;
+  padding-top: 10%;
   padding-bottom: 100px;
+}
+
+.profile-image img{
+  width:200px;
 }

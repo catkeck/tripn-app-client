@@ -13,17 +13,14 @@ class MapContainer extends React.Component {
   }
 
   onMarkerClick = (props, marker, e) => {
-    console.log(this.state)
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     })
-    console.log(this.state)
   }
 
   onMapClicked = () => {
-    console.log(this.state)
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,

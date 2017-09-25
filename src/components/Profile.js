@@ -11,7 +11,7 @@ import InterestsForm from './InterestsForm'
 import MapContainer from './MapContainer'
 
 const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/codeinfuse/image/upload'
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djlznf9dr/image/upload'
 
 class Profile extends React.Component {
 
@@ -21,7 +21,7 @@ class Profile extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.history.history.push(`/search/${this.props.searchTerm}`)
+    this.props.history.history.push(`/search/${this.props.searchTerm.replace(',','')}`)
   }
 
   handleDetectLocation = (event) => {
@@ -56,23 +56,14 @@ class Profile extends React.Component {
       // Initial FormData
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("tags", `codeinfuse, medium, gist`);
-      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET); // Replace the preset name with your own
-      formData.append("api_key", "811342252365591"); // Replace API key with your own Cloudinary key
-      formData.append("timestamp", (Date.now() / 1000) | 0);
-      
-      // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
+      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET); 
       return axios.post(CLOUDINARY_UPLOAD_URL, formData, {
         headers: { "X-Requested-With": "XMLHttpRequest" },
       }).then(response => {
         const data = response.data;
         const fileURL = data.secure_url // You should store this URL for future references in your app
-        console.log(data);
+        UserAdapter.saveUserImage(fileURL)
       })
-    });
-    // Once all the files are uploaded 
-    axios.all(uploaders).then(() => {
-      // ... perform after upload is successful operation
     });
   }
 
@@ -86,7 +77,7 @@ class Profile extends React.Component {
             <div id="left-half">
               <div id="search-box">
                 <h3>Welcome {this.props.username}</h3>
-                <img src={this.props.file} alt=""/>
+                <div className="profile-image"><img src={this.props.image} alt=""/></div>
                 <Dropzone 
                   onDrop={this.handleDrop} 
                   multiple={false}
@@ -132,7 +123,8 @@ function mapStateToProps(state) {
     trips: state.profile.trips,
     showButton: state.profile.showButton,
     isLoading: state.profile.isLoading,
-    activities: state.profile.activities
+    activities: state.profile.activities,
+    image: state.profile.image
   }
 }
 

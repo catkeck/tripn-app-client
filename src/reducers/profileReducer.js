@@ -1,9 +1,10 @@
-function profileReducer(state = {username: "", coordinates: "", searchTerm: "", trips: [], showButton: false, isLoading: false, file: "", activities: []}, action) {
+function profileReducer(state = {username: "", coordinates: "", searchTerm: "", trips: [], showButton: false, isLoading: false, activities: [], image: ""}, action) {
   switch(action.type) {
     case "FETCHING_USER_DATA":
       return Object.assign({}, state, {isLoading: true})
     case "FETCHED_USER_DATA": 
-      return Object.assign({}, state, {username: action.payload.username, trips: action.payload.trips, file: action.payload.image, activities: action.payload.activities, isLoading: false })
+      console.log(action.payload)
+      return Object.assign({}, state, {username: action.payload.username, trips: action.payload.trips, image: action.payload.image, activities: action.payload.activities, isLoading: false })
     case "FETCHING_POSITION":
       return Object.assign({}, state, {isLoading: true})
     case "FETCHED_POSITION":
@@ -11,7 +12,7 @@ function profileReducer(state = {username: "", coordinates: "", searchTerm: "", 
     case "SET_SEARCH_TERM":
       return Object.assign({}, state, {searchTerm: action.payload})
     case "SET_PROFILE_IMAGE":
-      return Object.assign({}, state, {file: action.payload.base64})
+      return Object.assign({}, state, {image: action.payload})
     default:
       return state
   }
