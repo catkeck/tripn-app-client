@@ -115,8 +115,8 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-bottom: 2px solid #16a085;
-  color: #16a085;
+  border-bottom: 2px solid #a01624;
+  color: #a01624;
   transition: 0.2s ease;
 }
 
@@ -124,7 +124,7 @@ input[type="submit"] {
   margin-top: 28px;
   width: 120px;
   height: 32px;
-  background: #16a085;
+  background: #a01624;
   border: none;
   border-radius: 2px;
   color: #FFF;
@@ -213,7 +213,7 @@ input[type="submit"]:active {
 
 button {
   margin-bottom: 20px;
-  margin-right: 125px;
+  margin-right: 20px;
   width:80%;
   height: 36px;
   border: none;
@@ -223,15 +223,15 @@ button {
   font-weight: 500;
   transition: 0.2s ease;
   cursor: pointer;
-  background: #16a085;
+  background: #a01624;
   float: right;
-
 }
 
 .x-button button {
   width: 25px;
   margin-right:50px;
 }
+
 button:hover,
 button:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -281,6 +281,7 @@ button:active {
   font-size: 20px;
   padding: 20px;
   padding-bottom: 40px;
+  margin-right: 125px;
 }
 
 .save-button {
