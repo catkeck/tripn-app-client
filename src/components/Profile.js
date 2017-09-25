@@ -23,7 +23,6 @@ class Profile extends React.Component {
     this.props.history.history.push(`/search/${this.props.searchTerm}`)
   }
 
-
   handleDetectLocation = (event) => {
     event.preventDefault();
     this.props.history.history.push(`/search/${this.props.coordinates}`)
@@ -39,11 +38,11 @@ class Profile extends React.Component {
     UserAdapter.saveUserImage(file);
   }
 
+  //not currently being used
   getPastVisitedLocations = () => {
     if (this.props.trips&&this.props.trips.length > 0){
       let tripArrayofArrays = this.props.trips.map(trip => trip[2]); 
       let val =  [].concat.apply([], tripArrayofArrays);
-      console.log(val)
       return val
     } else {
       return null;
@@ -70,7 +69,6 @@ class Profile extends React.Component {
         console.log(data);
       })
     });
-
     // Once all the files are uploaded 
     axios.all(uploaders).then(() => {
       // ... perform after upload is successful operation
@@ -78,8 +76,8 @@ class Profile extends React.Component {
   }
 
   render() {
+    //not currently using this
     const tripLocations = this.getPastVisitedLocations();
-    console.log(tripLocations)
     if (this.props.trips) {
       return (
         <div id="full-width">
@@ -105,13 +103,13 @@ class Profile extends React.Component {
                   <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
                   <input type="submit"/>
                 </form>
-                {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>Search Current Location</button></div> : null }
+                {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
               </div>
             </div>
           </div>
             <div id="bottom-section">
             <h2> Saved Itineraries </h2>
-              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'40%'} height={'20%'} profile={true}/>
+              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'60%'} profile={true}/>
             </div>
             <TripsContainer trips={this.props.trips}/>
         </div>
@@ -134,7 +132,6 @@ function mapStateToProps(state) {
     showButton: state.profile.showButton,
     isLoading: state.profile.isLoading,
     activities: state.profile.activities
-    
   }
 }
 

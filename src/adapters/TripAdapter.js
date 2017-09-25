@@ -4,6 +4,7 @@ export default class TripAdapter {
     return 'http://localhost:3000/api/v1/'   
   }
 
+
   static getActivities(location, offset) {
     const activityParams = {
       method: 'post',
@@ -14,20 +15,6 @@ export default class TripAdapter {
       body: JSON.stringify({searchTerm: location, offset: offset})
     }
     return fetch(`${TripAdapter.baseUrl()}activities`, activityParams)
-      .then(resp => resp.json())
-
-  }
-
-  static getRestaurants(location, offset) {
-    const restaurantParams = {
-      method: 'post',
-      headers: {
-        'Content-Type':'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({searchTerm: location, offset: offset})
-    }
-    return fetch(`${TripAdapter.baseUrl()}/restaurants`, restaurantParams)
       .then(resp => resp.json())
 
   }
@@ -45,6 +32,19 @@ export default class TripAdapter {
       .then(resp => resp.json())
   }
 
+  static getRestaurants(location, offset) {
+    const restaurantParams = {
+      method: 'post',
+      headers: {
+        'Content-Type':'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({searchTerm: location, offset: offset})
+    }
+    return fetch(`${TripAdapter.baseUrl()}/restaurants`, restaurantParams)
+      .then(resp => resp.json())
+
+  }
 
   static saveTrip(trip) {
     console.log(trip)

@@ -1,13 +1,5 @@
 import TripAdapter from '../adapters/TripAdapter'
 
-export function removeActivity(activity){
-  return {
-    type: "REMOVE_ACTIVITY",
-    payload: activity
-  }
-}
-
-
 export function fetchActivities(location) {
   return function(dispatch) {
     dispatch({type:"FETCHING_ACTIVITIES"})
@@ -27,6 +19,44 @@ export function fetchIndoorActivities(location) {
       })
   }
 }
+
+export function addActivities(location, index) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_ACTIVITIES"})
+    TripAdapter.getActivities(location, index)
+      .then(activities => {
+        dispatch({type: "ADD_ACTIVITIES", payload: activities.businesses.businesses})
+      })
+  }
+} 
+
+export function addIndoorActivities(location, index) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_ACTIVITIES"})
+    TripAdapter.getIndoorActivities(location, index)
+      .then(activities => {
+        dispatch({type: "ADD_ACTIVITIES", payload: activities.businesses.businesses})
+      })
+  }
+} 
+
+export function addRestaurants(location, index) {
+  return function(dispatch) {
+    dispatch({type:"FETCHING_RESTAURANTS"})
+    TripAdapter.getRestaurants(location, index)
+      .then(restaurants => {
+        dispatch({type: "ADD_RESTAURANTS", payload: restaurants.restaurants.businesses})
+      })
+  }
+} 
+
+export function removeActivity(activity){
+  return {
+    type: "REMOVE_ACTIVITY",
+    payload: activity
+  }
+}
+
 
 export function removeRestaurant(restaurant){
   return {
@@ -49,12 +79,13 @@ export function fetchStringWeather(location) {
   return function(dispatch) {
     dispatch({type: "FETCHING_WEATHER"})
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&APPID=600c24f64be0542ee3eea23ad03ee915`)
-      .then(response => response.json())
-      .then(
-            weather => {
+    .then(response => response.json())
+    .then(
+      weather => {
         dispatch({type: "FETCHED_WEATHER", payload: weather
         })
-      })
+      }
+    )
   }
 }
 
@@ -77,29 +108,21 @@ export function filterActivities(activityNames) {
     payload: activityNames
   }
 }
- 
-export function addActivities(location, index) {
-  return function(dispatch) {
-    dispatch({type:"FETCHING_ACTIVITIES"})
-    TripAdapter.getActivities(location, index)
-      .then(activities => {
-        dispatch({type: "ADD_ACTIVITIES", payload: activities.businesses.businesses})
-      })
-  }
-} 
-
-export function addRestaurants(location, index) {
-  return function(dispatch) {
-    dispatch({type:"FETCHING_RESTAURANTS"})
-    TripAdapter.getRestaurants(location, index)
-      .then(restaurants => {
-        dispatch({type: "ADD_RESTAURANTS", payload: restaurants.restaurants.businesses})
-      })
-  }
-} 
 
 export function setShuffledActivities(activities) {
   return {
     type: "FETCHED_ACTIVITIES", payload: activities
+  }
+}
+
+export function setFetchedOut() {
+  return {
+    type: "SET_UNFETCHABLE"
+  }
+}
+
+export function setBadWeather() {
+  return {
+    type: "SET_BAD_WEATHER"
   }
 }

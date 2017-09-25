@@ -6,7 +6,7 @@ import ItineraryMapContainer from './ItineraryMapContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addRestaurants, setShuffledActivities} from '../actions/itinerary'
+import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setFetchedOut, setBadWeather} from '../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0
@@ -27,24 +27,32 @@ class Itinerary extends React.Component {
     const LOCATION = this.props.data.match.params.location
     if (this.props.weatherData!== nextProps.weatherData && nextProps.weatherData!==undefined){
       if (nextProps.weatherData.weather[0].description.includes("rain")) {
+        this.props.setBadWeather();
         this.props.fetchIndoorActivities(LOCATION, 0)
       } else {
         this.props.fetchActivities(LOCATION, 0)
       }
     }
-
   }
 
   componentWillUpdate(nextProps,nextState) {
     if (this.props.activities.length > 1 && this.props.activities.length <= 5) {
       loadedActivities+=50
+      if (this.props.badWeather) {
+        this.props.addIndoorActivities(this.props.data.match.params.location, loadedActivities)
+      } else {
       this.props.addActivities(this.props.data.match.params.location, loadedActivities)
+      }
     }
     if (this.props.restaurants.length > 1 && this.props.restaurants.length <= 5) {
       loadedRestaurants+=50
       this.props.addRestaurants(this.props.data.match.params.location, loadedRestaurants)
     }
   }
+
+  // checkFetchable = () => {
+  //   console.log(this.props.activities)
+  // }
 
 
   filterActivities = () => {
@@ -76,27 +84,25 @@ class Itinerary extends React.Component {
     })
   }
 
-  shuffleItems = (items) => {
-    for (let i = items.length; i; i--) {
-        let j = Math.floor(Math.random() * i);
-        [items[i - 1], items[j]] = [items[j], items[i - 1]];
-    }
-    console.log(items)
-    this.props.setShuffledActivities(items)
-    // window.location.reload()
-  }
+  // shuffleItems = (items) => {
+  //   for (let i = items.length; i; i--) {
+  //       let j = Math.floor(Math.random() * i);
+  //       [items[i - 1], items[j]] = [items[j], items[i - 1]];
+  //   }
+  //   console.log(items)
+  //   this.props.setShuffledActivities(items)
+  // }
 
 
   render() {
+    console.log(this.props.activities)
     if (this.props.activities && this.props.restaurants) {
       let coordinateLocations = this.coordinateLocations();
-      let shuffledActivities = this.shuffleItems(this.props.activities)
       var addresses = [];
       return(
         <div id="full-width">
+          <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
           <div id="left-half">
-            <div><button onClick={this.handleSave}>Save Itinerary</button></div>
-            <div><button onClick={shuffledActivities}>Shuffle Order</button></div>
             <div className="itinerary">
               <h1> Itinerary </h1>
               {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
@@ -113,7 +119,7 @@ class Itinerary extends React.Component {
           </div>
           <div id="right-half">
             <Weather />
-            <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'20%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+            <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
           </div>
         </div>
       )
@@ -133,7 +139,9 @@ function mapStateToProps(state) {
     weatherData: state.itinerary.weather,
     trips: state.profile.trips,
     filtered: state.itinerary.filtered,
-    isLoading: state.itinerary.isLoading
+    isLoading: state.itinerary.isLoading,
+    fetchable: state.itinerary.fetchable,
+    badWeather: state.itinerary.badWeather
   }
 }
 

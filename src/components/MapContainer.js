@@ -42,12 +42,13 @@ class MapContainer extends React.Component {
           position={{lat: address.latitude, lng: address.longitude}} 
         />
       )) : null )
+    const style = { width: this.props.width, height: this.props.height, position: 'relative'}
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
         <div id="map-container">
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
-            style={{width: '80%', height: '50%', position: 'relative'}}  
+            style={style}  
             initialCenter={{
               lat: this.props.initialLat,
               lng: this.props.initialLon

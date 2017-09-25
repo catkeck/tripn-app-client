@@ -37,7 +37,7 @@
 }
 
 #right-half {
-  width: 40%;
+  width: 50%;
   float: right;
 }
 
@@ -256,4 +256,20 @@ button:active {
 
 .home {
   width: 100%;
+}
+
+.save-button button {
+  width: 80%;
+  font-size: 20px;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+
+.save-button {
+  padding-bottom: 100px;
+}
+
+.Weather {
+  padding-right: 20%;
+  padding-bottom: 100px;
 }

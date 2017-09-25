@@ -43,12 +43,13 @@ class ItineraryMapContainer extends React.Component {
           position={{lat: address.coordinates.latitude, lng: address.coordinates.longitude}} 
         />
       )) : null )
+    const style = { width: this.props.width, height: this.props.height, position: 'relative'}
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
         <div>
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
-            style={{width: '40%', height: '60%', position: 'relative'}}  
+            style={style} 
             initialCenter={{
               lat: this.props.initialLat,
               lng: this.props.initialLon
