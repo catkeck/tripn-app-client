@@ -1,5 +1,6 @@
 import React from 'react'
 import AuthAdapter from '../adapters/AuthAdapter'
+import swal from 'sweetalert'
 
 class Signup extends React.Component {
   constructor() {
@@ -25,7 +26,10 @@ class Signup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password === this.state.passwordConfirmation) {
+    if (this.state.username===""||this.state.password===""){
+      swal('This is not a valid sign up', 'Please fill in all fields', 'error')
+    }
+    else if (this.state.password === this.state.passwordConfirmation) {
       const userParams = {
         username: this.state.username,
         password: this.state.password
@@ -39,6 +43,10 @@ class Signup extends React.Component {
           this.props.history.replace("/")
         })
       this.props.handleLoginAndSignup()
+      swal('Congratulations you have signed up!', '', 'success')
+    }
+    else {
+      swal('Your password and password confirmation do not match', 'Please try again.', 'error')
     }
   }
 

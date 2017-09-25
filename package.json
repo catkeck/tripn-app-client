@@ -21,7 +21,8 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "sugar": "^2.0.4"
+    "sugar": "^2.0.4",
+    "sweetalert": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

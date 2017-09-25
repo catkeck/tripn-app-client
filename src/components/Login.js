@@ -1,5 +1,6 @@
 import React from 'react'
 import AuthAdapter from '../adapters/AuthAdapter'
+import swal from 'sweetalert'
 
 class Login extends React.Component {
   constructor() {
@@ -29,7 +30,7 @@ class Login extends React.Component {
         this.setState({username: "", password: ""})
         localStorage.setItem("token", user.jwt)
         this.props.history.replace("/")
-      })
+      }).catch(error => swal("This is not a valid login.", "Please try again",'error'))
     this.props.handleLoginAndSignup()
   }
 
