@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as SearchActions from '../actions/search'
 import {getCurrentPosition, setSearchTerm} from '../actions/search'
+import {Redirect} from 'react-router'
 
 class Search extends React.Component {
 
@@ -25,16 +26,21 @@ class Search extends React.Component {
   }
 
   render() {
-    return (
-      <div id="search-box">
-        <form onSubmit={this.handleSubmit}>
-          <h3> Get Itinerary </h3>
-          <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
-          <input type="submit"/>
-        </form>
-        {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
-      </div>
-    )
+    const token = localStorage.getItem("token")
+    if (token === null) {
+      return <Redirect to='/'/>
+    } else {
+      return (
+        <div id="search-box">
+          <form onSubmit={this.handleSubmit}>
+            <h3> Get Itinerary </h3>
+            <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
+            <input type="submit"/>
+          </form>
+          {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
+        </div>
+      )
+    }
   }
 }
 

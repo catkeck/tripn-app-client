@@ -53,11 +53,6 @@ class Itinerary extends React.Component {
     }
   }
 
-  // checkFetchable = () => {
-  //   console.log(this.props.activities)
-  // }
-
-
   filterActivities = () => {
     this.props.filterActivities(this.props.trips)
   }
@@ -78,7 +73,6 @@ class Itinerary extends React.Component {
       location: this.props.location
     }
     TripAdapter.saveTrip(tripParams);
-// this.props.history.history.push(`/search/${this.props.coordinates}`)
   }
 
   coordinateLocations = () => {
@@ -99,45 +93,51 @@ class Itinerary extends React.Component {
 
 
   render() {
-    if (this.props.activities === undefined) {
-      return (
-        <div id="full-width">
-          <h1> We are sorry but this location is not available to search at this time. </h1>
-        </div>
-      )
+    const token = localStorage.getItem("token")
+    if (token === null) {
+      return <Redirect to='/'/>
     }
-    else if (this.props.activities && this.props.restaurants) {
-      let coordinateLocations = this.coordinateLocations();
-      var addresses = [];
-      return(
-        <div id="full-width">
- 
-          <div id="left-half">
-            <div className="itinerary">
-              <h1> Itinerary </h1>
-              {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
-            </div>
-            <div className="food">
-              <h1> Food </h1>
-              {this.props.restaurants.length > 0 ? this.props.restaurants.slice(0,3).map((business,index) => 
-                <Activity 
-                  deleteActivity={this.deleteRestaurant} 
-                  key={index} 
-                  name={business.name} 
-                  data={business}/>) : null}
-            </div>
+    else {
+      if (this.props.activities === undefined) {
+        return (
+          <div id="full-width">
+            <h1> We are sorry but this location is not available to search at this time. </h1>
           </div>
-          <div id="right-half">
-            <Weather />
-            <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={this.props.activities[0].coordinates.latitude} initialLon={this.props.activities[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+        )
+      }
+      else if (this.props.activities && this.props.restaurants) {
+        let coordinateLocations = this.coordinateLocations();
+        var addresses = [];
+        return(
+          <div id="full-width">
+   
+            <div id="left-half">
+              <div className="itinerary">
+                <h1> Itinerary </h1>
+                {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
+              </div>
+              <div className="food">
+                <h1> Food </h1>
+                {this.props.restaurants.length > 0 ? this.props.restaurants.slice(0,3).map((business,index) => 
+                  <Activity 
+                    deleteActivity={this.deleteRestaurant} 
+                    key={index} 
+                    name={business.name} 
+                    data={business}/>) : null}
+              </div>
+            </div>
+            <div id="right-half">
+              <Weather />
+              <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={this.props.activities[0].coordinates.latitude} initialLon={this.props.activities[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+            </div>
+            <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
           </div>
-          <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
-        </div>
-      )
-    } else {
-      return (
-        <div><img src="Infinity.svg" alt=""/></div>
-      )
+        )
+      } else {
+        return (
+          <div><img src="Infinity.svg" alt=""/></div>
+        )
+      }
     }
   }
 

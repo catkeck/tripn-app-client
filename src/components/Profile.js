@@ -2,6 +2,7 @@ import React from 'react'
 import UserAdapter from '../adapters/UserAdapter'
 import TripsContainer from './TripsContainer'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
 import {getUserData, setProfileImage} from '../actions/profile'
@@ -14,7 +15,6 @@ const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djlznf9dr/image/upload'
 
 class Profile extends React.Component {
-
 
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
@@ -54,41 +54,47 @@ class Profile extends React.Component {
   }
 
   render() {
-    //not currently using this
-    const tripLocations = this.getPastVisitedLocations();
-    if (this.props.trips) {
-      return (
-        <div id="full-width">
-          <div id="top-section">
-            <div id="left-half">
-              <div id="search-box">
-                <h3>Welcome {this.props.username}</h3>
-                <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                <Dropzone 
-                  onDrop={this.handleDrop} 
-                  multiple={false}
-                  accept="image/*" 
-                >
-                  <p>Drop your files or click here to upload</p>
-              </Dropzone>
-                
+    const token = localStorage.getItem("token")
+    if (token === null) {
+      return <Redirect to='/'/>
+    } else {
+      const tripLocations = this.getPastVisitedLocations();
+      if (this.props.trips) {
+        return (
+          <div id="full-width">
+            <div id="top-section">
+              <div id="left-half">
+                <div id="search-box">
+                  <h3>Welcome {this.props.username}</h3>
+                  <div className="profile-image"><img src={this.props.image} alt=""/></div>
+                  <Dropzone 
+                    onDrop={this.handleDrop} 
+                    multiple={false}
+                    accept="image/*" 
+                  >
+                    <p>Drop your files or click here to upload</p>
+                </Dropzone>
+                  
+                </div>
+              </div>
+              <div id="right-half">
+                <div id="search-box">
+                  <InterestsForm />
+                </div>
               </div>
             </div>
-            <div id="right-half">
-             <InterestsForm />
-            </div>
+              <div id="bottom-section">
+                {this.props.trips.length > 0 ? <h2> Saved Itineraries </h2> : null }
+                <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'400px'} profile={true}/>
+              </div>
+              <TripsContainer trips={this.props.trips}/>
           </div>
-            <div id="bottom-section">
-              {this.props.trips.length > 0 ? <h2> Saved Itineraries </h2> : null }
-              <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'500px'} profile={true}/>
-            </div>
-            <TripsContainer trips={this.props.trips}/>
-        </div>
-      )
-    } else {
-      return (
-        <div><img src="Infinity.svg" alt=""/></div>
-      )
+        )
+      } else {
+        return (
+          <div><img src="Infinity.svg" alt=""/></div>
+        )
+      }
     }
   }
 }

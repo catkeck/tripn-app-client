@@ -6,6 +6,7 @@ const Activity = (props) => {
     props.deleteActivity(props.name)
   }
 
+
   return(
     <div className="activity">
       <div className="list-images">

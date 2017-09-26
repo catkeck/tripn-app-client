@@ -25,7 +25,11 @@ class NavBar extends React.Component {
             <Link to={`/`}>Tripn</Link>
           </h1>
         </div>
-         {localStorage["token"] ? <div className="auth-links">Welcome {this.props.username}! |<Link to={'/search'}> Plan a Trip |</Link><Link to={'/profile'}> My Profile </Link><Link to={'/'} onClick={this.handleLogout}>| Log Out</Link></div> : <div className="auth-links"><Link to={'/signup'}>Sign Up </Link><Link to={'/login'}>| Log In</Link></div>}
+         {localStorage["token"] ? <div className="auth-links"><div className="mini-image"><img src={this.props.image} alt=""/></div>  Welcome {this.props.username}! |
+            <Link to={'/profile'}> My Profile |</Link>
+            <Link to={'/search'}> Plan a Trip |</Link>
+            <Link to={'/'} onClick={this.handleLogout}> Log Out</Link>
+         </div> : <div className="auth-links"><Link to={'/signup'}>Sign Up </Link><Link to={'/login'}>| Log In</Link></div>}
         <h1></h1>
       </div>
    )
@@ -36,6 +40,7 @@ class NavBar extends React.Component {
 function mapStateToProps(state) {
   return {
     username: state.profile.username,
+    image: state.profile.image
   }
 }
 
