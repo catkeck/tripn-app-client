@@ -25,7 +25,7 @@ class NavBar extends React.Component {
             <Link to={`/`}>Tripn</Link>
           </h1>
         </div>
-         {localStorage["token"] ? <div className="auth-links"><div className="mini-image"><img src={this.props.image} alt=""/></div>  Welcome {this.props.username}! |
+         {localStorage["token"] ? <div className="auth-links"><div className="mini-image"><img src={this.props.image} alt=""/></div>       {this.props.username} |
             <Link to={'/profile'}> My Profile |</Link>
             <Link to={'/search'}> Plan a Trip |</Link>
             <Link to={'/'} onClick={this.handleLogout}> Log Out</Link>
