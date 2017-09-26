@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
-import {getUserData, setProfileImage} from '../actions/profile'
+import {getUserData, setProfileImage, addImage} from '../actions/profile'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import InterestsForm from './InterestsForm'
@@ -22,7 +22,7 @@ class Profile extends React.Component {
   
   getFiles = (file) => {
     this.props.setProfileImage(file);
-    UserAdapter.saveUserImage(file);
+    // UserAdapter.saveUserImage(file);
   }
 
   //not currently being used
@@ -48,7 +48,7 @@ class Profile extends React.Component {
       }).then(response => {
         const data = response.data;
         const fileURL = data.secure_url // You should store this URL for future references in your app
-        UserAdapter.saveUserImage(fileURL)
+        UserAdapter.saveUserImage(fileURL).then(data => this.props.addImage(data))
       })
     });
   }

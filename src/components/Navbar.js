@@ -8,7 +8,7 @@ import * as ProfileActions from '../actions/profile'
 import {getUserData} from '../actions/profile'
 
 class NavBar extends React.Component {
-
+  
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
   }

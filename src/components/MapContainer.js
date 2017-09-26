@@ -30,7 +30,6 @@ class MapContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     var markers = [];
     ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map(address =>
         <Marker

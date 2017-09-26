@@ -10,6 +10,13 @@ export function getUserData(json) {
   }
 }
 
+export function addImage(json) {
+  return {
+    type: "FETCHED_USER_DATA",
+    payload: json
+  }
+}
+
 export function setProfileImage(image) {
   return {
     type: "SET_PROFILE_IMAGE",

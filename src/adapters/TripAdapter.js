@@ -6,9 +6,11 @@ export default class TripAdapter {
 
 
   static getActivities(location, offset) {
+    const token =localStorage.getItem("token")
     const activityParams = {
       method: 'post',
       headers: {
+        'Authorization': token,
         'Content-Type':'application/json',
         'Accept': 'application/json'
       },
@@ -20,9 +22,11 @@ export default class TripAdapter {
   }
 
   static getIndoorActivities(location, offset) {
+    const token =localStorage.getItem("token")
     const activityParams = {
       method: 'post',
       headers: {
+        'Authorization': token,
         'Content-Type':'application/json',
         'Accept': 'application/json'
       },
@@ -33,9 +37,11 @@ export default class TripAdapter {
   }
 
   static getRestaurants(location, offset) {
+    const token =localStorage.getItem("token")
     const restaurantParams = {
       method: 'post',
       headers: {
+        'Authorization': token,
         'Content-Type':'application/json',
         'Accept': 'application/json'
       },
@@ -47,7 +53,6 @@ export default class TripAdapter {
   }
 
   static saveTrip(trip) {
-    console.log(trip)
     const token = localStorage.getItem("token")
     const tripSaveParams = {
       method: 'POST',

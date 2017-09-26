@@ -30,6 +30,21 @@ export default class UserAdapter {
       },
       body: JSON.stringify({image: image})
     }
-    fetch(`${UserAdapter.baseUrl()}/edit`, imageSaveParams)
+    return fetch(`${UserAdapter.baseUrl()}/save_image`, imageSaveParams).then(resp => resp.json())
+
+  }
+
+  static saveUserInterests(interests) {
+    const token = localStorage.getItem("token")
+    const interestsParams = {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({interests: interests})
+    }
+    fetch(`${UserAdapter.baseUrl()}/save_interests`, interestsParams)
   }
 }
