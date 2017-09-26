@@ -64,22 +64,25 @@ class Profile extends React.Component {
           <div id="full-width">
             <div id="top-section">
               <div id="left-half">
-                <div id="search-box">
-                  <h3>Welcome {this.props.username}</h3>
-                  <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                  <Dropzone 
-                    onDrop={this.handleDrop} 
-                    multiple={false}
-                    accept="image/*" 
-                  >
-                    <p>Drop your files or click here to upload</p>
-                </Dropzone>
-                  
+                <div id="welcome-box">
+                  <div id="welcome-name">Welcome {this.props.username}</div>
+                  <div className="image-setup">
+                    <div className="profile-image"><img src={this.props.image} alt=""/></div>
+                    <div className="dropzone">
+                      <Dropzone 
+                        onDrop={this.handleDrop} 
+                        multiple={false}
+                        accept="image/*" 
+                      >
+                        <p>Drop your files or click here to upload</p>
+                      </Dropzone>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div id="right-half">
-                <div id="search-box">
-                  <h3>Your current interests are: {this.props.interests.split(",").join(", ")}</h3>
+                <div className="interests-box">
+                  <p>Your saved interests are: {this.props.interests.split(",").join(", ")}</p>
                   <InterestsForm />
                 </div>
               </div>

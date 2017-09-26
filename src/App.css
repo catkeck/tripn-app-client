@@ -179,6 +179,7 @@ input[type="submit"]:active {
   width: 100%;
   height: 300px;
   padding-left:10%;
+  margin-left:10%;
 }
 
 .activity-info {
@@ -194,19 +195,7 @@ input[type="submit"]:active {
   text-align: left;
 }
 
-#activity {
-  float:left;
-  margin: 5% auto;
-  width: 300px;
-  height: 400px;
-  background: #FFF;
-  border-radius: 2px;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  padding: 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
+
    
 #top-section {
   float:left;
@@ -279,8 +268,8 @@ button:active {
   padding-left: 10%;
 }
 .trips {
-  margin-left: 100px;
-  margin-right: 100px;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .home {
@@ -306,10 +295,6 @@ button:active {
   padding-left: 20%;
   padding-top: 75px;
   padding-bottom: 100px;
-}
-
-.profile-image img{
-  width:300px;
 }
 
  hr { 
@@ -655,4 +640,105 @@ button:active {
 
 .interests-button {
   margin-top: 20px;
+  font-size: 20px;
+  padding: 20px;
+  padding-bottom: 40px;
+  margin-right:15px;
+}
+
+.dropzone {
+  float: right;
+}
+
+.profile-image {
+  float: left;
+
+}
+
+.profile-image img {
+  width:50%;
+}
+.interests-box {
+  position: relative;
+  margin: 5% auto;
+  width: 400px;
+  height: 400px;
+  background: #FFF;
+  border-radius: 2px;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  margin-top: 10%;
+}
+
+#welcome-box {
+  position: relative;
+  margin: 5% auto;
+  width: 90%;
+  height: 400px;
+  background: #FFF;
+  border-radius: 2px;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.interests-box input[type="text"],
+input[type="password"] {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 100%;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  transition: 0.2s ease;
+}
+
+.interests-box input[type="submit"] {
+  width:100%;
+}
+.trip {
+  float:left;
+  margin: 5% auto;
+  width: 300px;
+  height: 400px;
+  background: #FFF;
+  border-radius: 2px;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-left: 20px;
+}
+
+#welcome-name {
+  font-size: 50px;
+  padding-bottom:10px;
+}
+
+.interests-button {
+  margin-right: 10%;
+}
+
+.pad-button button{
+  margin-right: 0px;
+  width: 100%;
+}
+
+.image-setup{
+  width:100%;
+}
+
+.profile-image {
+  width:70%;
+}
+
+.dropzone {
+  width:30%;
 }

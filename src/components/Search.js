@@ -31,9 +31,9 @@ class Search extends React.Component {
       return <Redirect to='/'/>
     } else {
       return (
-        <div id="search-box">
+        <div className="interests-box">
           <form onSubmit={this.handleSubmit}>
-            <h3> Get Itinerary </h3>
+            <h1> Get Itinerary </h1>
             <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
             <input type="submit"/>
           </form>
