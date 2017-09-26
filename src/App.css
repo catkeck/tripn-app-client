@@ -422,23 +422,13 @@ button:active {
 .has-value.is-clearable.Select--single > .Select-control .Select-value {
   padding-right: 42px;
 }
-.has-value.Select--single > .Select-control .Select-value .Select-value-label,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
-  color: #333;
-}
+
 .has-value.Select--single > .Select-control .Select-value a.Select-value-label,
 .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {
   cursor: pointer;
   text-decoration: none;
 }
-.has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover,
-.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus,
-.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {
-  color: #C32E3C;
-  outline: none;
-  text-decoration: underline;
-}
+
 .Select-input {
   height: 34px;
   padding-left: 10px;
@@ -493,21 +483,7 @@ button:active {
   position: relative;
   vertical-align: middle;
 }
-.Select-clear-zone {
-  -webkit-animation: Select-animation-fadeIn 200ms;
-  -o-animation: Select-animation-fadeIn 200ms;
-  animation: Select-animation-fadeIn 200ms;
-  color: #999;
-  cursor: pointer;
-  display: table-cell;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  width: 17px;
-}
-.Select-clear-zone:hover {
-  color: #F1243C;
-}
+
 .Select-clear {
   display: inline-block;
   font-size: 18px;
@@ -516,28 +492,7 @@ button:active {
 .Select--multi .Select-clear-zone {
   width: 17px;
 }
-.Select-arrow-zone {
-  cursor: pointer;
-  display: table-cell;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  width: 25px;
-  padding-right: 5px;
-}
-.Select-arrow {
-  border-color: #999 transparent transparent;
-  border-style: solid;
-  border-width: 5px 5px 2.5px;
-  display: inline-block;
-  height: 0;
-  width: 0;
-  position: relative;
-}
-.is-open .Select-arrow,
-.Select-arrow-zone:hover > .Select-arrow {
-  border-top-color: #666;
-}
+
 .Select--multi .Select-multi-value-wrapper {
   display: inline-block;
 }
@@ -582,6 +537,7 @@ button:active {
   z-index: 1;
   -webkit-overflow-scrolling: touch;
 }
+
 .Select-menu {
   max-height: 198px;
   overflow-y: auto;
@@ -604,20 +560,20 @@ button:active {
   color: #333;
 }
 .Select-option.is-focused {
-  background-color: #FF787B;
+  background-color: #d9d9d9;
   color: #333;
 }
 .Select-option.is-disabled {
   color: #cccccc;
   cursor: default;
 }
-.Select-noresults {
+/*.Select-noresults {
   box-sizing: border-box;
   color: #999999;
   cursor: default;
   display: block;
   padding: 8px 10px;
-}
+}*/
 .Select--multi .Select-input {
   vertical-align: middle;
   margin-left: 10px;
@@ -629,7 +585,7 @@ button:active {
 .Select--multi .Select-value {
   background-color: #FFFFFF;
   border-radius: 2px;
-  border: 1px solid #FFBDC2;
+  border: 1px solid #a01624;
   color: #C32E3C;
   display: inline-block;
   font-size: 0.9em;
@@ -695,4 +651,8 @@ button:active {
   to {
     -webkit-transform: rotate(1turn);
   }
+}
+
+.interests-button {
+  margin-top: 20px;
 }

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
-import {getUserData, setProfileImage, addImage} from '../actions/profile'
+import {getUserData, setProfileImage, updateUserData} from '../actions/profile'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import InterestsForm from './InterestsForm'
@@ -48,7 +48,7 @@ class Profile extends React.Component {
       }).then(response => {
         const data = response.data;
         const fileURL = data.secure_url // You should store this URL for future references in your app
-        UserAdapter.saveUserImage(fileURL).then(data => this.props.addImage(data))
+        UserAdapter.saveUserImage(fileURL).then(data => this.props.updateUserData(data))
       })
     });
   }
@@ -79,6 +79,7 @@ class Profile extends React.Component {
               </div>
               <div id="right-half">
                 <div id="search-box">
+                  <h3>Your current interests are: {this.props.interests.split(",").join(", ")}</h3>
                   <InterestsForm />
                 </div>
               </div>
@@ -106,7 +107,8 @@ function mapStateToProps(state) {
     trips: state.profile.trips,
     isLoading: state.profile.isLoading,
     activities: state.profile.activities,
-    image: state.profile.image
+    image: state.profile.image,
+    interests: state.profile.interests
   }
 }
 

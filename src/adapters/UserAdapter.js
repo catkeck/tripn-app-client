@@ -45,6 +45,6 @@ export default class UserAdapter {
       },
       body: JSON.stringify({interests: interests})
     }
-    fetch(`${UserAdapter.baseUrl()}/save_interests`, interestsParams)
+    return fetch(`${UserAdapter.baseUrl()}/save_interests`, interestsParams).then(resp => resp.json())
   }
 }

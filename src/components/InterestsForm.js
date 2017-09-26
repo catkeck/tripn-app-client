@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import createClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import {MultiSelect} from 'react-selectize';
+import {connect} from 'react-redux'
 import UserAdapter from '../adapters/UserAdapter'
+import { bindActionCreators } from 'redux'
+import * as ProfileActions from '../actions/profile'
+import {saveUserInterests, updateInterests} from '../actions/profile'
 
 const DATA = [
   {label: 'Amusement Parks',value: 'amusementparks'},
@@ -262,8 +265,9 @@ class InterestsForm extends React.Component {
 
   handleClick = () => {
     console.log(this.state.value)
-    UserAdapter.saveUserInterests(this.state.value);
+    UserAdapter.saveUserInterests(this.state.value).then(data => this.props.updateUserData(data))
   }
+
 
   render() {
     const {crazy, disabled, stayOpen, value} = this.state;
@@ -281,12 +285,21 @@ class InterestsForm extends React.Component {
           simpleValue
           value={value}
         />
-        <button onClick={this.handleClick}>Save Interests</button>
+        <button className="interests-button" onClick={this.handleClick}>Save Interests</button>
       </div>
     )
   }
   
 }
 
-export default InterestsForm
+function mapStateToProps(state) {
+  return {
+    interests: state.profile.interests
+  }
+}
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ProfileActions, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(InterestsForm)

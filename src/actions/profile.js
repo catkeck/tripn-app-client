@@ -10,7 +10,7 @@ export function getUserData(json) {
   }
 }
 
-export function addImage(json) {
+export function updateUserData(json) {
   return {
     type: "FETCHED_USER_DATA",
     payload: json
