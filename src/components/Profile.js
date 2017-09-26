@@ -4,7 +4,7 @@ import TripsContainer from './TripsContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
-import {getUserData, getCurrentPosition, setSearchTerm, setProfileImage} from '../actions/profile'
+import {getUserData, setProfileImage} from '../actions/profile'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import InterestsForm from './InterestsForm'
@@ -15,23 +15,9 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djlznf9dr/image/u
 
 class Profile extends React.Component {
 
-  handleChange = (event) => {
-    this.props.setSearchTerm(event.target.value)
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.history.history.push(`/search/${this.props.searchTerm.replace(',','')}`)
-  }
-
-  handleDetectLocation = (event) => {
-    event.preventDefault();
-    this.props.history.history.push(`/search/${this.props.coordinates}`)
-  }
 
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
-    this.props.getCurrentPosition();
   }
   
   getFiles = (file) => {
@@ -63,7 +49,6 @@ class Profile extends React.Component {
         const data = response.data;
         const fileURL = data.secure_url // You should store this URL for future references in your app
         UserAdapter.saveUserImage(fileURL)
-        this.forceUpdate()
       })
     });
   }
@@ -86,18 +71,11 @@ class Profile extends React.Component {
                 >
                   <p>Drop your files or click here to upload</p>
               </Dropzone>
-                <InterestsForm />
+                
               </div>
             </div>
             <div id="right-half">
-              <div id="search-box">
-                <form onSubmit={this.handleSubmit}>
-                  <h3> Get Itinerary </h3>
-                  <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
-                  <input type="submit"/>
-                </form>
-                {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
-              </div>
+             <InterestsForm />
             </div>
           </div>
             <div id="bottom-section">
@@ -119,10 +97,7 @@ class Profile extends React.Component {
 function mapStateToProps(state) {
   return {
     username: state.profile.username,
-    coordinates: state.profile.coordinates,
-    searchTerm: state.profile.searchTerm,
     trips: state.profile.trips,
-    showButton: state.profile.showButton,
     isLoading: state.profile.isLoading,
     activities: state.profile.activities,
     image: state.profile.image

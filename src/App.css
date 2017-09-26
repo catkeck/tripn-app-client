@@ -47,6 +47,7 @@
 
 .auth-links {
   float: right;
+  color: black;
 }
 
 a:link, a:visited {
@@ -60,6 +61,7 @@ a:link, a:visited {
 
 .itinerary {
   float: right;
+  margin-top: 75px;
 }
 
 .itinerary h1, .food h1{
@@ -175,7 +177,7 @@ input[type="submit"]:active {
 
 .activity {
   width: 100%;
-  height: 350px;
+  height: 300px;
   padding-left:10%;
 }
 
@@ -285,24 +287,34 @@ button:active {
 }
 
 .save-button button {
-  width: 80%;
+  width: 300px;
   font-size: 20px;
   padding: 20px;
   padding-bottom: 40px;
-  margin-right: 125px;
+
 }
 
 .save-button {
-  padding-bottom: 100px;
+  position: fixed;
+  top: 100px;
+  z-index: 2;
 }
 
 .weather {
   padding-right: 20%;
   padding-left: 20%;
-  padding-top: 10%;
+  padding-top: 75px;
   padding-bottom: 100px;
 }
 
 .profile-image img{
-  width:200px;
+  width:300px;
+}
+
+ hr { 
+  margin-top: 10px; 
+}
+
+.interests-form {
+  overflow: scroll;
 }

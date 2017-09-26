@@ -3,6 +3,7 @@ import TripAdapter from '../adapters/TripAdapter'
 import Weather from './Weather'
 import Activity from './Activity'
 import ItineraryMapContainer from './ItineraryMapContainer'
+import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
@@ -76,7 +77,8 @@ class Itinerary extends React.Component {
       restaurants: this.props.restaurants.slice(0,3),
       location: this.props.location
     }
-    TripAdapter.saveTrip(tripParams)
+    TripAdapter.saveTrip(tripParams);
+// this.props.history.history.push(`/search/${this.props.coordinates}`)
   }
 
   coordinateLocations = () => {
