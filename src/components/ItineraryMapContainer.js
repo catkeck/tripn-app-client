@@ -32,16 +32,7 @@ class ItineraryMapContainer extends React.Component {
     }
   }
 
-  setLat = () => {
-    return this.props.initialLat
-  }
-
-  setLon = () => {
-    return this.props.initialLon
-  }
-
   render() {
-    console.log(this.props)
     var markers = [];
     ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map((address, index) =>
         <Marker
@@ -60,8 +51,8 @@ class ItineraryMapContainer extends React.Component {
             onClick={this.onMapClicked} 
             style={style} 
             initialCenter={{
-              lat: this.setLat(),
-              lng: this.setLon()
+              lat: this.props.initialLat,
+              lng: this.props.initialLon
             }} 
             zoom={this.props.zoom}>
             {markers}

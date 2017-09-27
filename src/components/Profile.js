@@ -22,10 +22,8 @@ class Profile extends React.Component {
   
   getFiles = (file) => {
     this.props.setProfileImage(file);
-    // UserAdapter.saveUserImage(file);
   }
 
-  //not currently being used
   getPastVisitedLocations = () => {
     if (this.props.trips&&this.props.trips.length > 0){
       let tripArrayofArrays = this.props.trips.map(trip => trip[2]); 
@@ -35,6 +33,7 @@ class Profile extends React.Component {
       return null;
     }
   }
+
 
   handleDrop = (files) => {
     // Push all the axios request promise into a single array

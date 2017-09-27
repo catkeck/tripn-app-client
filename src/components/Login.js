@@ -26,37 +26,8 @@ class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.login(this.state, this.props.history)
-
-    // const userParams = {
-    //   username: this.state.username,
-    //   password: this.state.password
-    // }
-    // AuthAdapter.login(userParams)
-    //   .then((user) => {
-    //     this.setState({username: "", password: ""})
-    //     localStorage.setItem("token", user.jwt)
-    //     this.props.history.replace("/")
-    //   }).catch(error => swal("This is not a valid login.", "Please try again",'error'))
-    // this.props.handleLoginAndSignup()
   }
-
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     loggedin: false
-  //   }
-  // }
-
-  // handleLogout = (event) => {
-  //   event.preventDefault();
-  //   AuthAdapter.logOut();
-  //   this.setState({loggedin: false})
-  // }
-
-  // handleLoginAndSignup = () => {
-  //   this.setState({loggedin: true})
-  // }
-
+  
   render() {
     return (
       <div id="login-box">

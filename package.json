@@ -21,6 +21,7 @@
     "react-select": "^1.0.0-rc.10",
     "react-selectize": "^3.0.1",
     "react-transition-group": "^1.1.2",
+    "react-weathericons": "^1.0.4",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",

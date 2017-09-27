@@ -40,20 +40,6 @@ class Signup extends React.Component {
     } else {
       swal('Your password and password confirmation do not match', 'Please try again.', 'error')
     }
-    //   const userParams = {
-    //     username: this.state.username,
-    //     password: this.state.password
-    //   }
-    //   AuthAdapter.signup(userParams)
-    //     .then((user) => {
-    //       this.setState({username: "", password: ""})
-          
-    //       localStorage.setItem("token", user.jwt)
-    //       this.props.history.replace("/")
-    //     })
-    //   swal('Congratulations you have signed up!', '', 'success')
-    // }
-    // 
   }
 
   render() {

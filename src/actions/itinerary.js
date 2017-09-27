@@ -15,6 +15,7 @@ export function fetchIndoorActivities(location) {
     dispatch({type:"FETCHING_ACTIVITIES"})
     TripAdapter.getIndoorActivities(location, 0)
       .then(activities => {
+        console.log(activities)
         dispatch({type: "FETCHED_ACTIVITIES", payload: activities.businesses.businesses})
       })
   }

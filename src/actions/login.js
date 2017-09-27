@@ -12,8 +12,6 @@ export function login(userParams, history) {
   }
 }
 
-// localStorage.setItem("token", user.jwt)
-
 export function logout() {
   AuthAdapter.logOut();
   return {

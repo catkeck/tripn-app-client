@@ -1,28 +1,64 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const Weather = (props) => {
+class Weather extends React.Component {
 
-  const convertToCelsius = (fahrenheit) => {
+  convertToCelsius = (fahrenheit) => {
     return (fahrenheit-32)*5/9
   }
+                  
+  weatherImage = () => {
+    console.log(this.props.weatherData)
+    if (this.props.weatherData && this.props.weatherData.weather) {
+      const description = this.props.weatherData.weather[0].description
+      const dayOrNight = this.props.weatherData.weather[0].icon[2]
+      if (dayOrNight === "d") {
+        return this.dayIcons(description)
+      } else {
+        return this.nightIcons(description)
+      }
+    }
+  }
 
-  // weatherImage = () => {
-  //   let weatherIcon = ""
-  //   console.log(this.props.weatherData)
-  //   if (this.props.weatherData.weather && this.props.weatherData.weather[0].description.includes("clear")) {
-  //     return `&#x263c;`
-  //   } else if ((his.props.weatherData.weather && this.props.weatherData.weather[0].description.includes("rain")))
-  // //   return weatherIcon
-  // }
+  dayIcons = (description) => {
+    console.log(description)
+    if (description.includes("clouds")) {
+      return <i className="wi wi-day-cloudy"></i>
+    } else if (description.includes("sunny") || description.includes("clear")) {
+      return <i className="wi wi-day-sunny"></i>
+    } else if (description.includes("foggy")) {
+      return <i className="wi wi-day-foggy"></i>
+    } else if (description.includes("rain")) {
+      return <i className="wi wi-day-showers"></i>
+    } else if (description.includes("haze")) {
+      return <i className="wi wi-day-haze"></i>
+    }
+  }
 
-  return(
+  nightIcons = (description) => {
+    console.log(description)
+    if (description.includes("clouds")) {
+      return <i className="wi wi-night-cloudy"></i>
+    } else if (description.includes("clear")) {
+      return <i className="wi wi-night-clear"></i>
+    } else if (description.includes("foggy")) {
+      return <i className="wi wi-night-foggy"></i>
+    } else if (description.includes("rain")) {
+      return <i className="wi wi-night-showers"></i>
+    } else if (description.includes("haze")) {
+      return <i className="wi wi-night-fog"></i>
+    }
+  }
 
-    <div className="weather">
-      {props.weatherData.main ? <div><h1>Current Weather in {props.location.charAt(0).toUpperCase() + props.location.slice(1)}</h1><h1>{props.weatherData.main.temp} &#8457; / {convertToCelsius(props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{props.weatherData.main.humidity} Humidity</h2><p>{props.weatherData.temp_min}</p><p>{props.weatherData.temp_max}</p><p>{props.weatherData.weather[0].main}({props.weatherData.weather[0].description})</p></div> : null}
+  render() {
+    const weatherImage = this.weatherImage();
+    return(
+      <div className="weather">
+        {this.props.weatherData.main ? <div><h1>Current Weather in {this.props.location.charAt(0).toUpperCase() + this.props.location.slice(1)}</h1><h1>{this.props.weatherData.main.temp} &#8457; / {this.convertToCelsius(this.props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{this.props.weatherData.main.humidity} Humidity</h2><p>{this.props.weatherData.temp_min}</p><p>{this.props.weatherData.temp_max}</p><p>{this.props.weatherData.weather[0].main} ({this.props.weatherData.weather[0].description})</p>{weatherImage}</div> : null}
+      </div>
+    )
+  }
 
-    </div>
-  )
 }
 
 

@@ -265,7 +265,6 @@ class InterestsForm extends React.Component {
       </div>
     )
   }
-  
 }
 
 function mapStateToProps(state) {

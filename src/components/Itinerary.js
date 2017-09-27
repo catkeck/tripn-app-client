@@ -67,16 +67,21 @@ class Itinerary extends React.Component {
 
   handleSave = (event) => {
     event.preventDefault()
+    const activitiesMin = Math.min(this.props.activities.length, 4)
+    const restaurantsMin = Math.min(this.props.restaurants.length, 3)
     const tripParams = {
-      activities: this.props.activities.slice(0,4),
-      restaurants: this.props.restaurants.slice(0,3),
+      activities: this.props.activities.slice(0,activitiesMin),
+      restaurants: this.props.restaurants.slice(0,restaurantsMin),
       location: this.props.location
     }
     TripAdapter.saveTrip(tripParams);
   }
 
   coordinateLocations = () => {
-    let addresses = this.props.activities.slice(0,4).concat(this.props.restaurants.slice(0,3))
+    const activitiesMin = Math.min(this.props.activities.length, 4)
+    const restaurantsMin = Math.min(this.props.restaurants.length, 3)
+    let addresses = this.props.activities.slice(0,activitiesMin).concat(this.props.restaurants.slice(0,restaurantsMin))
+    addresses = addresses.filter(function(address){ return address != undefined }); 
     return addresses.filter(function(address) {
       return address.coordinates && address.coordinates.longitude !== null 
     })
@@ -110,7 +115,6 @@ class Itinerary extends React.Component {
         var addresses = [];
         return(
           <div id="full-width">
-   
             <div id="itinerary-left-half">
               <div className="itinerary">
                 <h1> Itinerary </h1>
@@ -140,7 +144,6 @@ class Itinerary extends React.Component {
       }
     }
   }
-
 }
 
 function mapStateToProps(state) {
