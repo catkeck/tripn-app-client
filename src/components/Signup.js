@@ -1,6 +1,10 @@
 import React from 'react'
 import AuthAdapter from '../adapters/AuthAdapter'
 import swal from 'sweetalert'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as LoginActions from '../actions/login'
+import {login,signup} from '../actions/login'
 
 class Signup extends React.Component {
   constructor() {
@@ -26,28 +30,30 @@ class Signup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
     if (this.state.username===""||this.state.password===""){
       swal('This is not a valid sign up', 'Please fill in all fields', 'error')
     }
     else if (this.state.password === this.state.passwordConfirmation) {
-      const userParams = {
-        username: this.state.username,
-        password: this.state.password
-      }
-      AuthAdapter.signup(userParams)
-        .then((user) => {
-          this.setState({username: "", password: ""})
-          
-          localStorage.setItem("token", user.jwt)
-          // console.log(this.props.history)
-          this.props.history.replace("/")
-        })
-      this.props.handleLoginAndSignup()
+      this.props.signup(this.state, this.props.history)
       swal('Congratulations you have signed up!', '', 'success')
-    }
-    else {
+    } else {
       swal('Your password and password confirmation do not match', 'Please try again.', 'error')
     }
+    //   const userParams = {
+    //     username: this.state.username,
+    //     password: this.state.password
+    //   }
+    //   AuthAdapter.signup(userParams)
+    //     .then((user) => {
+    //       this.setState({username: "", password: ""})
+          
+    //       localStorage.setItem("token", user.jwt)
+    //       this.props.history.replace("/")
+    //     })
+    //   swal('Congratulations you have signed up!', '', 'success')
+    // }
+    // 
   }
 
   render() {
@@ -65,5 +71,8 @@ class Signup extends React.Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(LoginActions, dispatch)
+}
 
-export default Signup
+export default connect(null,mapDispatchToProps)(Signup)

@@ -111,7 +111,7 @@ class Itinerary extends React.Component {
         return(
           <div id="full-width">
    
-            <div id="left-half">
+            <div id="itinerary-left-half">
               <div className="itinerary">
                 <h1> Itinerary </h1>
                 {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}

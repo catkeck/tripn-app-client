@@ -1,6 +1,10 @@
 import React from 'react'
 import AuthAdapter from '../adapters/AuthAdapter'
 import swal from 'sweetalert'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as LoginActions from '../actions/login'
+import {login} from '../actions/login'
 
 class Login extends React.Component {
   constructor() {
@@ -21,18 +25,37 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const userParams = {
-      username: this.state.username,
-      password: this.state.password
-    }
-    AuthAdapter.login(userParams)
-      .then((user) => {
-        this.setState({username: "", password: ""})
-        localStorage.setItem("token", user.jwt)
-        this.props.history.replace("/")
-      }).catch(error => swal("This is not a valid login.", "Please try again",'error'))
-    this.props.handleLoginAndSignup()
+    this.props.login(this.state, this.props.history)
+
+    // const userParams = {
+    //   username: this.state.username,
+    //   password: this.state.password
+    // }
+    // AuthAdapter.login(userParams)
+    //   .then((user) => {
+    //     this.setState({username: "", password: ""})
+    //     localStorage.setItem("token", user.jwt)
+    //     this.props.history.replace("/")
+    //   }).catch(error => swal("This is not a valid login.", "Please try again",'error'))
+    // this.props.handleLoginAndSignup()
   }
+
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     loggedin: false
+  //   }
+  // }
+
+  // handleLogout = (event) => {
+  //   event.preventDefault();
+  //   AuthAdapter.logOut();
+  //   this.setState({loggedin: false})
+  // }
+
+  // handleLoginAndSignup = () => {
+  //   this.setState({loggedin: true})
+  // }
 
   render() {
     return (
@@ -48,6 +71,8 @@ class Login extends React.Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(LoginActions, dispatch)
+}
 
-
-export default Login
+export default connect(null,mapDispatchToProps)(Login)

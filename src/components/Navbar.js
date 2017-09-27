@@ -5,7 +5,9 @@ import TripsContainer from './TripsContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
+import * as LoginActions from '../actions/login'
 import {getUserData} from '../actions/profile'
+import {logout} from '../actions/login'
 
 class NavBar extends React.Component {
   
@@ -15,6 +17,7 @@ class NavBar extends React.Component {
 
   handleLogout = () => {
     localStorage.removeItem("token")
+    this.props.logout();
   }                      
   
   render() {
@@ -25,7 +28,7 @@ class NavBar extends React.Component {
             <Link to={`/`}>Tripn</Link>
           </h1>
         </div>
-         {localStorage["token"] ? <div className="auth-links"><div className="mini-image"><img src={this.props.image} alt=""/></div>       {this.props.username} |
+         {this.props.token.length > 0 ? <div className="auth-links"><div className="mini-image"><img src={this.props.image} alt=""/></div>       {this.props.username} |
             <Link to={'/profile'}> My Profile |</Link>
             <Link to={'/search'}> Plan a Trip |</Link>
             <Link to={'/'} onClick={this.handleLogout}> Log Out</Link>
@@ -39,7 +42,8 @@ class NavBar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    username: state.profile.username,
+    username: state.login.username,
+    token: state.login.token,
     image: state.profile.image
   }
 }
