@@ -29,13 +29,25 @@ class MapContainer extends React.Component {
     }
   }
 
+  reformatAddressData = (address) => {
+    return {lat: address.latitude || address.coordinates.latitude,
+      lng: address.longitude || address.coordinates.longitude
+    }
+  }
+
+  reformatName = () => {
+    return this.props.address ? (this.props.address.activity || this.props.address.name) : null
+  }
+
+
   render() {
+    console.log(this.props.addresses)
     var markers = [];
     ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map(address =>
         <Marker
-          name={address.activity}
+          name={this.reformatName()}
           onClick={this.onMarkerClick}
-          position={{lat: address.latitude, lng: address.longitude}} 
+          position={this.reformatAddressData(address)} 
         />
       )) : null )
     const style = { width: this.props.width, height: this.props.height, position: 'relative'}

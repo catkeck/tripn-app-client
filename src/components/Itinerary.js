@@ -2,7 +2,7 @@ import React from 'react'
 import TripAdapter from '../adapters/TripAdapter'
 import Weather from './Weather'
 import Activity from './Activity'
-import ItineraryMapContainer from './ItineraryMapContainer'
+import MapContainer from './MapContainer'
 import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -92,12 +92,6 @@ class Itinerary extends React.Component {
     this.props.shuffleItems()
   }
 
-  // reformatMapData= (this.coordinates) => {
-  //   {mycoordinateX: this.coordinates.doc.x || this.coordinates.x,
-  //     mycoordinateY: this.coordinates.doc.y || this.coordinates.y
-  //   }
-    
-  // }
 
 
   handlePriceFilter = (event) => {
@@ -150,7 +144,7 @@ class Itinerary extends React.Component {
             <div id="right-half">   
               <Weather name={coordinateLocations[0].location.city}/>
               <div>
-                <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
+                <MapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
               </div>
 
             </div>
