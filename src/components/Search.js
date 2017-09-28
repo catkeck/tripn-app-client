@@ -8,20 +8,6 @@ import Select from 'react-select';
 
 
 class Search extends React.Component {
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     value:[]
-  //   }
-  // }
-  // <h3 className="section-heading">Filter for Restaurant Prices?</h3>
-  // <Select
-  //   multi={true}
-  //   onChange={this.selectChange}
-  //   options={OPTIONS}
-  //   simpleValue
-  //   value={this.state.value}
-  // />
 
   handleSelectChange = (value) => {
     console.log('You\'ve selected:', value);
@@ -52,7 +38,6 @@ class Search extends React.Component {
     if (token === null) {
       return <Redirect to='/'/>
     } else {
-      // const options = OPTIONS;
       return (
         <div className="interests-box">
           <form onSubmit={this.handleSubmit}>

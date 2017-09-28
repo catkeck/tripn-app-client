@@ -10,6 +10,13 @@ import InterestsForm from './InterestsForm'
 import MapContainer from './MapContainer'
 import ImageDrop from './ImageDrop'
 class Profile extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      displayAddImage: false
+    }
+  }
+
 
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
@@ -23,6 +30,10 @@ class Profile extends React.Component {
     } else {
       return null;
     }
+  }
+
+  showAddImage = () => {
+    this.state.displayAddImage ? this.setState({displayAddImage: false}) : this.setState({displayAddImage: true})
   }
 
   render() {
@@ -40,7 +51,8 @@ class Profile extends React.Component {
                   <div id="welcome-name">Welcome {this.props.username}</div>
                   <div className="image-setup">
                     <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                    <ImageDrop />
+                    <button onClick={this.showAddImage}>Add/Hide Image</button>
+                    {this.state.displayAddImage ? <ImageDrop /> : null}
                   </div>
                 </div>
               </div>

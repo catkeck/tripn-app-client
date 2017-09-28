@@ -295,10 +295,15 @@ button:active {
 .trips {
   padding-left: 15%;
   padding-right: 15%;
+  padding-top: 15%;
 }
 
 .home {
   width: 100%;
+}
+
+.home img {
+  width:100%;
 }
 
 .save-button button {
@@ -674,7 +679,8 @@ button:active {
 }
 
 .dropzone {
-  float: right;
+  float: left;
+  
 }
 
 .profile-image {
@@ -766,11 +772,7 @@ input[type="password"] {
 }
 
 .profile-image {
-  width:70%;
-}
-
-.dropzone {
-  width:30%;
+  width:100%;
 }
 
 .wi {

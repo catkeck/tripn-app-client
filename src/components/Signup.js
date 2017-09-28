@@ -30,11 +30,9 @@ class Signup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
     if (this.state.username===""||this.state.password===""){
       swal('This is not a valid sign up', 'Please fill in all fields', 'error')
-    }
-    else if (this.state.password === this.state.passwordConfirmation) {
+    } else if (this.state.password === this.state.passwordConfirmation) {
       this.props.signup(this.state, this.props.history)
       swal('Congratulations you have signed up!', '', 'success')
     } else {
