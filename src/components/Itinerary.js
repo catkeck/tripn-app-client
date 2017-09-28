@@ -7,10 +7,17 @@ import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setFetchedOut, setBadWeather, setLocation} from '../actions/itinerary'
+import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setShuffledRestaurants, setBadWeather, setLocation} from '../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0
+const OPTIONS = [
+  {label: '$', value: '1'},
+  {label: '$$', value: '2'},
+  {label: '$$$', value: '3'},
+  {label: '$$$$', value: '4'}
+]
+
 
 class Itinerary extends React.Component {
 
@@ -39,7 +46,7 @@ class Itinerary extends React.Component {
   }
 
   componentWillUpdate(nextProps,nextState) {
-    if (this.props.activities && this.props.activities.length > 1 && this.props.activities.length <= 5) {
+    if (this.props.activities && this.props.activities.length > 1 && this.props.activities.length <= 5 && this.props.moreActivities) {
       loadedActivities+=50
       if (this.props.badWeather) {
         this.props.addIndoorActivities(this.props.data.match.params.location, loadedActivities)
@@ -47,7 +54,7 @@ class Itinerary extends React.Component {
       this.props.addActivities(this.props.data.match.params.location, loadedActivities)
       }
     }
-    if (this.props.restaurants && this.props.restaurants.length > 1 && this.props.restaurants.length <= 5) {
+    if (this.props.restaurants && this.props.restaurants.length > 1 && this.props.restaurants.length <= 5 && this.props.moreRestaurants) {
       loadedRestaurants+=50
       this.props.addRestaurants(this.props.data.match.params.location, loadedRestaurants)
     }
@@ -67,37 +74,52 @@ class Itinerary extends React.Component {
 
   handleSave = (event) => {
     event.preventDefault()
-    const activitiesMin = Math.min(this.props.activities.length, 4)
-    const restaurantsMin = Math.min(this.props.restaurants.length, 3)
     const tripParams = {
-      activities: this.props.activities.slice(0,activitiesMin),
-      restaurants: this.props.restaurants.slice(0,restaurantsMin),
+      activities: this.props.activities.slice(0,4),
+      restaurants: this.props.restaurants.slice(0,3),
       location: this.props.location
     }
     TripAdapter.saveTrip(tripParams);
   }
 
   coordinateLocations = () => {
-    const activitiesMin = Math.min(this.props.activities.length, 4)
-    const restaurantsMin = Math.min(this.props.restaurants.length, 3)
-    let addresses = this.props.activities.slice(0,activitiesMin).concat(this.props.restaurants.slice(0,restaurantsMin))
+    let addresses = this.props.activities.slice(0,4).concat(this.props.restaurants.slice(0,3))
     addresses = addresses.filter(function(address){ return address != undefined }); 
     return addresses.filter(function(address) {
       return address.coordinates && address.coordinates.longitude !== null 
     })
   }
 
-  // shuffleItems = (items) => {
-  //   for (let i = items.length; i; i--) {
-  //       let j = Math.floor(Math.random() * i);
-  //       [items[i - 1], items[j]] = [items[j], items[i - 1]];
-  //   }
-  //   console.log(items)
-  //   this.props.setShuffledActivities(items)
-  // }
+  shuffleBoth = () => {
+    let shuffledActivities = this.shuffleItems(this.props.activities)
+    this.props.setShuffledActivities(shuffledActivities)
+    let shuffledRestaurants = this.shuffleItems(this.props.restaurants)
+    this.props.setShuffledRestaurants(shuffledRestaurants)
+  }
+
+  shuffleItems = (items) => {
+    for (let i = items.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [items[i - 1], items[j]] = [items[j], items[i - 1]];
+    }
+    return items
+  }
 
 
+  handlePriceFilter = (event) => {
+    let options = event.target.options;
+    console.log(options)
+    var value = [];
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    this.props.someCallback(value);
+  }
+ 
   render() {
+    console.log("original activities", this.props.activities)
     const token = localStorage.getItem("token")
     if (token === null) {
       return <Redirect to='/'/>
@@ -110,12 +132,15 @@ class Itinerary extends React.Component {
           </div>
         )
       }
-      else if (this.props.activities && this.props.restaurants) {
+      else if (this.props.activities && this.props.restaurants && (this.props.activities.length > 1 || this.props.restaurants.length > 1)) {
         let coordinateLocations = this.coordinateLocations();
+        const cityName = this.props.activities[0].location.city
+        console.log(coordinateLocations)
+        console.log(this.props.activities)
         var addresses = [];
         return(
           <div id="full-width">
-            <div id="itinerary-left-half">
+            <div id="itinerary-left-half">  
               <div className="itinerary">
                 <h1> Itinerary </h1>
                 {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
@@ -127,19 +152,24 @@ class Itinerary extends React.Component {
                     deleteActivity={this.deleteRestaurant} 
                     key={index} 
                     name={business.name} 
-                    data={business}/>) : null}
+                    data={business}/>
+                    ) : null}
               </div>
+              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle</button></div>
             </div>
-            <div id="right-half">
-              <Weather />
-              <div> {this.props.activities.length> 0? <ItineraryMapContainer addresses={coordinateLocations} initialLat={this.props.activities[0].coordinates.latitude} initialLon={this.props.activities[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>: <h1><img src="Infinity.svg" alt=""/></h1>}</div>
+            <div id="right-half">   
+              <Weather name={cityName}/>
+              <div>
+                <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
+              </div>
+
             </div>
             <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
           </div>
         )
       } else {
         return (
-          <div><img src="Infinity.svg" alt=""/></div>
+          <div><img src="Cube.svg" alt=""/></div>
         )
       }
     }
@@ -154,9 +184,10 @@ function mapStateToProps(state) {
     trips: state.profile.trips,
     filtered: state.itinerary.filtered,
     isLoading: state.itinerary.isLoading,
-    fetchable: state.itinerary.fetchable,
     badWeather: state.itinerary.badWeather,
-    location: state.itinerary.location
+    location: state.itinerary.location,
+    moreActivities: state.itinerary.moreActivities,
+    moreRestaurants: state.itinerary.moreRestaurants
   }
 }
 

@@ -116,11 +116,12 @@ export function setShuffledActivities(activities) {
   }
 }
 
-export function setFetchedOut() {
+export function setShuffledRestaurants(restaurants) {
   return {
-    type: "SET_UNFETCHABLE"
+    type: "FETCHED_RESTAURANTS", payload: restaurants
   }
 }
+
 
 export function setBadWeather() {
   return {

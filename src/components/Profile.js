@@ -36,9 +36,7 @@ class Profile extends React.Component {
 
 
   handleDrop = (files) => {
-    // Push all the axios request promise into a single array
     const uploaders = files.map(file => {
-      // Initial FormData
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET); 
@@ -46,7 +44,7 @@ class Profile extends React.Component {
         headers: { "X-Requested-With": "XMLHttpRequest" },
       }).then(response => {
         const data = response.data;
-        const fileURL = data.secure_url // You should store this URL for future references in your app
+        const fileURL = data.secure_url
         UserAdapter.saveUserImage(fileURL).then(data => this.props.updateUserData(data))
       })
     });
@@ -95,7 +93,7 @@ class Profile extends React.Component {
         )
       } else {
         return (
-          <div><img src="Infinity.svg" alt=""/></div>
+          <div><img src="Cube.svg" alt=""/></div>
         )
       }
     }

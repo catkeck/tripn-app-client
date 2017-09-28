@@ -249,7 +249,7 @@ class InterestsForm extends React.Component {
     const {crazy, disabled, stayOpen, value} = this.state;
     const options = DATA;
     return (
-      <div clasName="section">
+      <div className="section">
         <h3 className="section-heading">Choose Interests</h3>
         <Select
           closeOnSelect={!stayOpen}

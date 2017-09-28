@@ -4,8 +4,29 @@ import { bindActionCreators } from 'redux'
 import * as SearchActions from '../actions/search'
 import {getCurrentPosition, setSearchTerm} from '../actions/search'
 import {Redirect} from 'react-router'
+import Select from 'react-select';
+
 
 class Search extends React.Component {
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     value:[]
+  //   }
+  // }
+  // <h3 className="section-heading">Filter for Restaurant Prices?</h3>
+  // <Select
+  //   multi={true}
+  //   onChange={this.selectChange}
+  //   options={OPTIONS}
+  //   simpleValue
+  //   value={this.state.value}
+  // />
+
+  handleSelectChange = (value) => {
+    console.log('You\'ve selected:', value);
+    this.setState({value});
+  }
 
   handleChange = (event) => {
     this.props.setSearchTerm(event.target.value)
@@ -27,13 +48,16 @@ class Search extends React.Component {
 
   render() {
     const token = localStorage.getItem("token")
+
     if (token === null) {
       return <Redirect to='/'/>
     } else {
+      // const options = OPTIONS;
       return (
         <div className="interests-box">
           <form onSubmit={this.handleSubmit}>
             <h1> Get Itinerary </h1>
+
             <input type="text" value={this.props.searchTerm} onChange={this.handleChange}/>
             <input type="submit"/>
           </form>

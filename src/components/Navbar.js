@@ -41,7 +41,7 @@ class NavBar extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    username: state.login.username,
+    username: state.profile.username,
     token: state.login.token,
     image: state.profile.image
   }

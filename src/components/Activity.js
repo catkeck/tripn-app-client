@@ -10,7 +10,7 @@ const Activity = (props) => {
   return(
     <div className="activity">
       <div className="list-images">
-        <img src={props.data.image_url} alt=""/>
+        {props.data.image_url.length >= 1 ? <img src={props.data.image_url} alt=""/> : <img src="default.jpg" alt="" />}
       </div>
       <div className="activity-info">
         <div className="x-button">

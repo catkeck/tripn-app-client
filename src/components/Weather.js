@@ -32,6 +32,10 @@ class Weather extends React.Component {
       return <i className="wi wi-day-showers"></i>
     } else if (description.includes("haze")) {
       return <i className="wi wi-day-haze"></i>
+    } else if (description.includes("sleet")) {
+      return <i className="wi wi-day-sleet"></i>
+    } else if (description.includes("thunderstorm")) {
+      return <i className="wi wi-day-thunderstorm"></i>
     }
   }
 
@@ -47,6 +51,10 @@ class Weather extends React.Component {
       return <i className="wi wi-night-showers"></i>
     } else if (description.includes("haze")) {
       return <i className="wi wi-night-fog"></i>
+    } else if (description.includes("sleet")) {
+      return <i className="wi wi-night-sleet"></i>
+    } else if (description.includes("thunderstorm")) {
+      return <i className="wi wi-night-alt-thunderstorm"></i>
     }
   }
 
@@ -54,13 +62,11 @@ class Weather extends React.Component {
     const weatherImage = this.weatherImage();
     return(
       <div className="weather">
-        {this.props.weatherData.main ? <div><h1>Current Weather in {this.props.location.charAt(0).toUpperCase() + this.props.location.slice(1)}</h1><h1>{this.props.weatherData.main.temp} &#8457; / {this.convertToCelsius(this.props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{this.props.weatherData.main.humidity} Humidity</h2><p>{this.props.weatherData.temp_min}</p><p>{this.props.weatherData.temp_max}</p><p>{this.props.weatherData.weather[0].main} ({this.props.weatherData.weather[0].description})</p>{weatherImage}</div> : null}
+        {this.props.weatherData.main ? <div><h1>Current Weather in {this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1)}</h1><h1>{this.props.weatherData.main.temp} &#8457; / {this.convertToCelsius(this.props.weatherData.main.temp).toFixed(2)} &#x2103;</h1><h2>{this.props.weatherData.main.humidity} Humidity</h2><p>{this.props.weatherData.temp_min}</p><p>{this.props.weatherData.temp_max}</p><p>{this.props.weatherData.weather[0].main} ({this.props.weatherData.weather[0].description})</p>{weatherImage}</div> : null}
       </div>
     )
   }
-
 }
-
 
 function mapStateToProps(state) {
   return {
@@ -68,6 +74,5 @@ function mapStateToProps(state) {
     location: state.itinerary.location
   }
 }
-
 
 export default connect(mapStateToProps,null)(Weather)
