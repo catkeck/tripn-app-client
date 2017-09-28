@@ -194,6 +194,7 @@ input[type="submit"]:active {
 
 .list-images img{
   width: 40%;
+  border-radius: 25px;
   max-height: 300px;
   float: left;
   text-align: left;
@@ -292,6 +293,7 @@ button:active {
   position: fixed;
   top: 100px;
   z-index: 2;
+  right: 0;
 }
 
 .weather {
@@ -310,6 +312,7 @@ button:active {
 }
 
 .mini-image img{
+  border-radius: 5px;
   width:30px;
 }
 
@@ -318,13 +321,18 @@ button:active {
 }
 
 .footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-    text-align: center;
-    margin-bottom: 0;
-    float: bottom;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  margin-bottom: 0;
+  float: bottom;
+}
+
+.list-images {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .Select {

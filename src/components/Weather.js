@@ -8,7 +8,6 @@ class Weather extends React.Component {
   }
                   
   weatherImage = () => {
-    console.log(this.props.weatherData)
     if (this.props.weatherData && this.props.weatherData.weather) {
       const description = this.props.weatherData.weather[0].description
       const dayOrNight = this.props.weatherData.weather[0].icon[2]
@@ -21,7 +20,6 @@ class Weather extends React.Component {
   }
 
   dayIcons = (description) => {
-    console.log(description)
     if (description.includes("clouds")) {
       return <i className="wi wi-day-cloudy"></i>
     } else if (description.includes("sunny") || description.includes("clear")) {

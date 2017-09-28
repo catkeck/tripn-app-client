@@ -10,6 +10,13 @@ export function fetchActivities(location) {
   }
 }
 
+
+export function shuffleItems() {
+  return {
+    type:"SHUFFLE_ALL"
+  }
+}
+
 export function fetchIndoorActivities(location) {
   return function(dispatch) {
     dispatch({type:"FETCHING_ACTIVITIES"})

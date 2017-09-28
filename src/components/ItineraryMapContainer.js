@@ -32,6 +32,7 @@ class ItineraryMapContainer extends React.Component {
     }
   }
 
+
   render() {
     var markers = [];
     ((this.props.addresses&&this.props.addresses.length>0) ? (markers = this.props.addresses.map((address, index) =>

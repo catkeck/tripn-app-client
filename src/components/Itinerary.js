@@ -7,7 +7,6 @@ import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ItineraryActions from '../actions/itinerary'
-import {removeActivity, fetchIndoorActivities, fetchActivities, removeRestaurant, fetchRestaurants, fetchStringWeather, fetchCoordinateWeather, filterActivities, addActivities, addIndoorActivities, addRestaurants, setShuffledActivities, setShuffledRestaurants, setBadWeather, setLocation} from '../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0
@@ -17,7 +16,6 @@ const OPTIONS = [
   {label: '$$$', value: '3'},
   {label: '$$$$', value: '4'}
 ]
-
 
 class Itinerary extends React.Component {
 
@@ -91,19 +89,15 @@ class Itinerary extends React.Component {
   }
 
   shuffleBoth = () => {
-    let shuffledActivities = this.shuffleItems(this.props.activities)
-    this.props.setShuffledActivities(shuffledActivities)
-    let shuffledRestaurants = this.shuffleItems(this.props.restaurants)
-    this.props.setShuffledRestaurants(shuffledRestaurants)
+    this.props.shuffleItems()
   }
 
-  shuffleItems = (items) => {
-    for (let i = items.length; i; i--) {
-        let j = Math.floor(Math.random() * i);
-        [items[i - 1], items[j]] = [items[j], items[i - 1]];
-    }
-    return items
-  }
+  // reformatMapData= (this.coordinates) => {
+  //   {mycoordinateX: this.coordinates.doc.x || this.coordinates.x,
+  //     mycoordinateY: this.coordinates.doc.y || this.coordinates.y
+  //   }
+    
+  // }
 
 
   handlePriceFilter = (event) => {
@@ -119,7 +113,6 @@ class Itinerary extends React.Component {
   }
  
   render() {
-    console.log("original activities", this.props.activities)
     const token = localStorage.getItem("token")
     if (token === null) {
       return <Redirect to='/'/>
@@ -134,9 +127,6 @@ class Itinerary extends React.Component {
       }
       else if (this.props.activities && this.props.restaurants && (this.props.activities.length > 1 || this.props.restaurants.length > 1)) {
         let coordinateLocations = this.coordinateLocations();
-        const cityName = this.props.activities[0].location.city
-        console.log(coordinateLocations)
-        console.log(this.props.activities)
         var addresses = [];
         return(
           <div id="full-width">
@@ -155,10 +145,10 @@ class Itinerary extends React.Component {
                     data={business}/>
                     ) : null}
               </div>
-              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle</button></div>
+              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle {this.props.activities.length} - {this.props.restaurants.length}</button></div>
             </div>
             <div id="right-half">   
-              <Weather name={cityName}/>
+              <Weather name={coordinateLocations[0].location.city}/>
               <div>
                 <ItineraryMapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
               </div>
