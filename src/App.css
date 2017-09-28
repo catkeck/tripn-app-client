@@ -22,6 +22,25 @@
   to { transform: rotate(360deg); }
 }
 
+html, body {
+  height: 100%;
+  margin:0;
+  padding:0;
+  background-color:#FFF;
+}
+
+#root {
+    min-height: 100%;
+    float: left;
+    width: 100%;
+    position:relative;
+}
+
+.map-container > div {
+  height:auto;
+}
+
+
 #full-width {
   margin-left: auto;
   margin-right: auto;
@@ -263,10 +282,11 @@ button:active {
 }
 
 .map-container {
-  width: 40%;
-  height:200px;
+  width: 70%;
+  height: 250px;
   padding-bottom: 15%;
-  padding-left: 15%;
+  padding-left: 10%;
+  position: relative;
 }
 
 .itinerary-map {
@@ -322,12 +342,15 @@ button:active {
 
 .footer {
   left: 0;
+  position:absolute;
   bottom: 0;
   width: 100%;
-  background-color: white;
+  background-color: #a01624;
   text-align: center;
   margin-bottom: 0;
-  float: bottom;
+  clear: both;
+  right: 0;
+  height:50px;
 }
 
 .list-images {
@@ -719,6 +742,7 @@ input[type="password"] {
   padding: 40px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   margin-left: 20px;
+  margin-bottom: 100px;
 }
 
 #welcome-name {

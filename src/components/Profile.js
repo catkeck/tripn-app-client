@@ -6,22 +6,13 @@ import {Redirect} from 'react-router'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
 import {getUserData, setProfileImage, updateUserData} from '../actions/profile'
-import Dropzone from 'react-dropzone'
-import axios from 'axios'
 import InterestsForm from './InterestsForm'
 import MapContainer from './MapContainer'
-
-const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djlznf9dr/image/upload'
-
+import ImageDrop from './ImageDrop'
 class Profile extends React.Component {
 
   componentDidMount() {
     UserAdapter.getUserInfo().then(json => this.props.getUserData(json))
-  }
-  
-  getFiles = (file) => {
-    this.props.setProfileImage(file);
   }
 
   getPastVisitedLocations = () => {
@@ -32,22 +23,6 @@ class Profile extends React.Component {
     } else {
       return null;
     }
-  }
-
-
-  handleDrop = (files) => {
-    const uploaders = files.map(file => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET); 
-      return axios.post(CLOUDINARY_UPLOAD_URL, formData, {
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-      }).then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url
-        UserAdapter.saveUserImage(fileURL).then(data => this.props.updateUserData(data))
-      })
-    });
   }
 
   render() {
@@ -65,15 +40,7 @@ class Profile extends React.Component {
                   <div id="welcome-name">Welcome {this.props.username}</div>
                   <div className="image-setup">
                     <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                    <div className="dropzone">
-                      <Dropzone 
-                        onDrop={this.handleDrop} 
-                        multiple={false}
-                        accept="image/*" 
-                      >
-                        <p>Drop your files or click here to upload</p>
-                      </Dropzone>
-                    </div>
+                    <ImageDrop />
                   </div>
                 </div>
               </div>
@@ -86,7 +53,7 @@ class Profile extends React.Component {
             </div>
               <div id="bottom-section">
                 {this.props.trips.length > 0 ? <div id="welcome-name">Saved Itineraries</div>: null }
-                <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'70%'} height={'400px'} profile={true}/>
+                <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'100%'} height={'200px'} profile={true}/>
               </div>
               <TripsContainer trips={this.props.trips}/>
           </div>

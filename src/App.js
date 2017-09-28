@@ -25,7 +25,7 @@ class App extends Component {
         <Route exact path={'/search'} render={(history) => <Search history={history}/>}/>
         <Route exact path={'/signup'} render={({history}) => <Signup history={history} handleLoginAndSignup={this.handleLoginAndSignup}/>}/>
         <Route path={'/search/:location'} render={(match) => <Itinerary data={match}/>}/>
- 
+        <div className="footer"></div>
       </div>
     );
   }
