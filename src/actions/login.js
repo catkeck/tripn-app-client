@@ -7,7 +7,7 @@ export function login(userParams, history) {
     .then(user => {
       dispatch({type: "FETCHED_USER_LOGIN", payload: user})
     })
-    .then(() => history.replace('/'))
+    .then(() => history.replace('/profile'))
     .catch(error => swal("This is not a valid login.", "Please try again",'error'))
   }
 }
@@ -25,6 +25,6 @@ export function signup(userParams, history) {
     .then(user => {
       dispatch({type: "FETCHED_USER_LOGIN", payload: user})
     })
-    .then(() => history.replace('/'))
+    .then(() => history.replace('/profile'))
   }
 }

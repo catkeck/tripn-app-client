@@ -21,6 +21,7 @@ class Itinerary extends React.Component {
 
   componentDidMount() {
     const LOCATION = this.props.data.match.params.location
+    console.log(LOCATION)
     this.props.fetchActivities(LOCATION, 0)
     this.props.fetchRestaurants(LOCATION, 0)
     if (isNaN(LOCATION.charAt(0))) {
@@ -115,7 +116,7 @@ class Itinerary extends React.Component {
       if (this.props.activities === undefined) {
         return (
           <div id="full-width">
-            <h1> We are sorry but this location is not available to search at this time. </h1>
+            <h1> This location is not available to be searched at this time. </h1>
           </div>
         )
       }
@@ -139,14 +140,11 @@ class Itinerary extends React.Component {
                     data={business}/>
                     ) : null}
               </div>
-              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle {this.props.activities.length} - {this.props.restaurants.length}</button></div>
+              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle</button></div>
             </div>
             <div id="right-half">   
               <Weather name={coordinateLocations[0].location.city}/>
-              <div>
-                <MapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
-              </div>
-
+              <MapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
             </div>
             <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
           </div>

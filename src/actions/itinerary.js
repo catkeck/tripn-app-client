@@ -1,6 +1,7 @@
 import TripAdapter from '../adapters/TripAdapter'
 
 export function fetchActivities(location) {
+  console.log(location)
   return function(dispatch) {
     dispatch({type:"FETCHING_ACTIVITIES"})
     TripAdapter.getActivities(location, 0)
