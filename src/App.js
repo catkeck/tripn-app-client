@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Navbar from './components/Navbar'
@@ -9,6 +9,7 @@ import Profile from './components/Profile'
 import Home from './components/Home'
 import Search from './components/Search'
 import Itinerary from './components/Itinerary'
+import Contact from './components/Contact'
 
 class App extends Component {
 
@@ -26,7 +27,12 @@ class App extends Component {
         <Route exact path={'/signup'} render={({history}) => <Signup history={history} handleLoginAndSignup={this.handleLoginAndSignup}/>}/>
         <Route path={'/search/:location'} render={(match) => <Itinerary data={match}/>}/>
         <Route path={'/search/:location/:from/:to'} render={(match) => <Itinerary data={match}/>}/>
-        <div className="footer"></div>
+        <Route exact path={'/contactus'} component={Contact}/>
+        <div className="footer">
+          <div className="auth-links"> 
+            <Link to={'/contactus'}> Contact Us</Link>
+          </div>
+        </div>
       </div>
     );
   }

@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux'
 import * as SearchActions from '../actions/search'
 import {getCurrentPosition, setSearchTerm} from '../actions/search'
 import {Redirect} from 'react-router'
-import Select from 'react-select';
-import Calendar from './Calendar'
 import MapSearch from './MapSearch'
 
 class Search extends React.Component {
@@ -41,6 +39,7 @@ class Search extends React.Component {
       return (
         <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
           <div className="box a" style={{width: '100%', padding: '30px'}}>
+            <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
             <form onSubmit={this.handleSubmit}>
               <h1> Get Itinerary </h1>
               <input type="text" value={this.props.searchTerm} onChange={this.handleChange} style={{ margin: '0 auto'}}/>
@@ -49,6 +48,8 @@ class Search extends React.Component {
             {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
           </div>
           <div className="box b" style={{ width: '100%', position: 'relative', height: '500px'}}>
+          <h1> - OR - </h1>
+          <p> by selecting your location on the map below: </p>
             <MapSearch history={this.props.history}/>
           </div>
         </div>

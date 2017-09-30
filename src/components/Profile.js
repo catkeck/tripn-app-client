@@ -55,7 +55,7 @@ class Profile extends React.Component {
                 <div id="welcome-name">Welcome {this.props.username}</div>
                 <div className="image-setup">
                   <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                  <button onClick={this.showAddImage}>Add/Hide Image</button>
+                  <button className="interests-button"onClick={this.showAddImage}>Add/Hide Image</button>
                   {this.state.displayAddImage ? <ImageDrop /> : null}
                 </div>
               </div>

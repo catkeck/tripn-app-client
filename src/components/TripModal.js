@@ -29,6 +29,7 @@ class TripModal extends React.Component {
         <ReactModal 
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
+           style={{width: '60%'}}
         >
           <div id="react-modal">
             <h1>{this.props.location}</h1>
