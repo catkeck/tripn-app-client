@@ -12,9 +12,11 @@ const Trip = (props) => {
   const activities = props.tripData[3].slice(0,4)
   const food = props.tripData[3].slice(4,7)
   return (
-    <div className="trip" style={{backgroundImage: `url(${props.tripData[2]})`, backgroundSize: 'cover'}}>
-      <h3>{location} ({date})</h3>
-      <TripModal location={location} date={date} activities={activities} food={food}/>
+    <div className="parent-trip">
+      <div className="trip" style={{backgroundImage: `url(${props.tripData[2]})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
+        <h3>{location} ({date})</h3>
+        <TripModal location={location} date={date} activities={activities} food={food}/>
+      </div>
     </div>
   )
 }

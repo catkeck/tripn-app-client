@@ -805,22 +805,34 @@ input[type="password"] {
 .interests-box input[type="submit"] {
   width:100%;
 }
-.trip {
+
+.parent-trip {
+  width: 300px;
+  height: 400px;
   float:left;
+  margin: 10px;
+  position: relative;
+  overflow:hidden;
+  
+}
+.trip {
   margin: 5% auto;
   width: 300px;
   height: 400px;
-  background: #FFF;
-  border-radius: 2px;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
+  background-color: black;
   padding: 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  margin-left: 20px;
-  margin-bottom: 100px;
   color: white;
+  background-size: cover;
+
 }
+
+.parent-trip:hover .trip:hover,
+.parent-trip:focus .trip:focus {
+  transform: scale(1.2);
+  transition: all .5s;
+}
+
+
 
 #welcome-name {
   font-size: 30px;

@@ -49,20 +49,22 @@ class Profile extends React.Component {
       console.log(tripLocations)
       if (this.props.trips) {
         return (
-          <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
-            <div className="box a" style={{width: '50%', padding: '30px'}}>
-              <div id="welcome-name">Welcome {this.props.username}</div>
-              <div className="image-setup">
-                <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                <button onClick={this.showAddImage}>Add/Hide Image</button>
-                {this.state.displayAddImage ? <ImageDrop /> : null}
+          <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1500px', margin: '0 auto'}}>
+            <div className="mini-wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}>
+              <div className="box a" style={{width: '50%', maxWidth: '500px', marginTop: '190px'}}>
+                <div id="welcome-name">Welcome {this.props.username}</div>
+                <div className="image-setup">
+                  <div className="profile-image"><img src={this.props.image} alt=""/></div>
+                  <button onClick={this.showAddImage}>Add/Hide Image</button>
+                  {this.state.displayAddImage ? <ImageDrop /> : null}
+                </div>
+              </div>
+              <div className="box c interests-box" style={{ width: '50%', maxWidth: '500px'}}>
+                <p>Your saved interests are: {this.props.interests.split(",").join(", ")}</p>
+                <InterestsForm />
               </div>
             </div>
-          <div className="box c interests-box" style={{ width: '50%'}}>
-            <p>Your saved interests are: {this.props.interests.split(",").join(", ")}</p>
-            <InterestsForm />
-          </div>
-          <div className="box b" style={{ width: '100%', position: 'relative', height: '700px'}}>
+          <div className="box b" style={{ width: '100%', position: 'relative', height: '700px', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto'}}>
             {this.props.trips.length > 0 ? <div id="welcome-name">Saved Itineraries</div>: null }
             <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} profile={true} width={'100%'} height={'100%'}/>
           </div>
