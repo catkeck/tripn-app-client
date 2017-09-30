@@ -9,6 +9,8 @@ import {getUserData, setProfileImage, updateUserData} from '../actions/profile'
 import InterestsForm from './InterestsForm'
 import MapContainer from './MapContainer'
 import ImageDrop from './ImageDrop'
+
+
 class Profile extends React.Component {
   constructor() {
     super()
@@ -62,6 +64,7 @@ class Profile extends React.Component {
             <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} profile={true} width={'100%'} height={'100%'}/>
           </div>
           <TripsContainer trips={this.props.trips}/>
+
         </div>
         )
       } else {

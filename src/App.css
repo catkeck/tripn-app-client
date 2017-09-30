@@ -242,6 +242,11 @@ input[type="submit"]:active {
   width: 50%;
 }
 
+.list-images {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
 .list-images img{
   width: 40%;
   border-radius: 25px;
@@ -251,10 +256,45 @@ input[type="submit"]:active {
 }
 
 
+.modal-images img{
+  width: 30%;
+  border-radius: 25px;
+  max-height: 250px;
+  float: left;
+  text-align: left;
+}
+
+.modal-images {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  margin-left:20%;
+}
+
+.modal-activity-info {
+  float: right;
+  margin-right: 20%;
+}
+
+#react-modal h1, h2{
+  text-align: center;
+}
    
 #top-section {
   float:left;
   width: 100%;
+}
+
+#close-button {
+  padding : 15px 30px 14px 30px;
+  margin  : 5px auto;
+  display : block;
+  text-align: center;
+  width:100%;
+  margin:0;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
 }
 
 #bottom-section{
@@ -391,10 +431,7 @@ button:active {
   height:50px;
 }
 
-.list-images {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
+
 
 .Select {
   position: relative;
@@ -820,3 +857,6 @@ input[type="password"] {
   padding-bottom: 50px;
 }
 
+.ReactModal__Overlay--after-open {
+  z-index: 10;
+}

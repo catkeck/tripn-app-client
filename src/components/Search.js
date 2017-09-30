@@ -40,16 +40,13 @@ class Search extends React.Component {
     } else {
       return (
         <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
-          <div className="box a" style={{width: '50%', padding: '30px'}}>
+          <div className="box a" style={{width: '100%', padding: '30px'}}>
             <form onSubmit={this.handleSubmit}>
               <h1> Get Itinerary </h1>
               <input type="text" value={this.props.searchTerm} onChange={this.handleChange} style={{ margin: '0 auto'}}/>
               <input type="submit"/>
             </form>
             {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
-          </div>
-           <div className="box c" style={{ width: '50%'}}>
-            <Calendar/>
           </div>
           <div className="box b" style={{ width: '100%', position: 'relative', height: '500px'}}>
             <MapSearch history={this.props.history}/>
