@@ -49,10 +49,9 @@ class MapContainer extends React.Component {
           position={this.reformatAddressData(address)} 
         />
       )) : null )
-    const style = { width: '100%', height: '100%', position: 'relative'}
+    const style = { width: this.props.width, height: this.props.height}
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
-        <div className="map-container">
           <Map google={this.props.google} 
             onClick={this.onMapClicked} 
             style={style}  
@@ -70,7 +69,7 @@ class MapContainer extends React.Component {
               </div>
             </InfoWindow>
           </Map>
-        </div> : null)
+        : null)
     );
   }
 }

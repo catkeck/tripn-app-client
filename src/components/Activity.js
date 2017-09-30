@@ -21,8 +21,6 @@ const Activity = (props) => {
         <p>{props.data.display_phone}</p>
         <p>{props.data.price ? `Price: ${props.data.price}` : null}</p>
       </div>
-      <div></div>
-      <hr width="90%" size="2"/>
     </div>
   )
 

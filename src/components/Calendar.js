@@ -7,11 +7,13 @@ class Example extends React.Component {
   state = {
     from: null,
     to: null,
+    searchTerm: null
   };
   handleDayClick = day => {
     const range = DateUtils.addDayToRange(day, this.state);
     this.setState(range);
   };
+
   handleResetClick = e => {
     e.preventDefault();
     this.setState({
@@ -19,7 +21,20 @@ class Example extends React.Component {
       to: null,
     });
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.history.history.push(`/search/${this.props.state.searchTerm.replace(',','')}/${this.props.state.from}/${this.props.state.to}`)
+  }
+
+
+  handleChange = (event) => {
+    this.setState({searchTerm: event.target.value})
+  }
+
   render() {
+    console.log(this.state.from)
+    console.log(this.state.to)
     const { from, to } = this.state;
     return (
       <div className="RangeExample">
@@ -37,7 +52,13 @@ class Example extends React.Component {
           onDayClick={this.handleDayClick}
           fixedWeeks={2}
         />
+        <form onSubmit={this.handleSubmit}>
+          <h3> Enter Location </h3>
+          <input type="text" value={this.props.searchTerm} onChange={this.handleChange} style={{ margin: '0 auto'}}/>
+          <input type="submit"/>
+        </form>
       </div>
+
     );
   }
 }

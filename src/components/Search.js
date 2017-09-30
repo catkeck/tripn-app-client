@@ -11,7 +11,6 @@ import MapSearch from './MapSearch'
 class Search extends React.Component {
 
   handleSelectChange = (value) => {
-    console.log('You\'ve selected:', value);
     this.setState({value});
   }
 
@@ -34,7 +33,6 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this.props.history)
     const token = localStorage.getItem("token")
 
     if (token === null) {

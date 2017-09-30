@@ -33,7 +33,7 @@ export default class TripAdapter {
       },
       body: JSON.stringify({searchTerm: location, offset: offset})
     }
-    return fetch(`${TripAdapter.baseUrl()}/indoor_activities`, activityParams)
+    return fetch(`${TripAdapter.baseUrl()}indoor_activities`, activityParams)
       .then(resp => resp.json())
   }
 
@@ -48,7 +48,7 @@ export default class TripAdapter {
       },
       body: JSON.stringify({searchTerm: location, offset: offset})
     }
-    return fetch(`${TripAdapter.baseUrl()}/restaurants`, restaurantParams)
+    return fetch(`${TripAdapter.baseUrl()}restaurants`, restaurantParams)
       .then(resp => resp.json())
 
   }
@@ -64,6 +64,6 @@ export default class TripAdapter {
       },
       body: JSON.stringify({trip: trip})
     }
-    fetch(`${TripAdapter.baseUrl()}/schedules/new`, tripSaveParams)
+    fetch(`${TripAdapter.baseUrl()}schedules/new`, tripSaveParams)
   }
 }

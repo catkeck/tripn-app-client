@@ -34,7 +34,7 @@ class Itinerary extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const LOCATION = this.props.data.match.params.location
-    if (this.props.weatherData!== nextProps.weatherData && nextProps.weatherData!==undefined){
+    if (nextProps.weatherData.weather && this.props.weatherData!== nextProps.weatherData && nextProps.weatherData!==undefined){
       if (nextProps.weatherData.weather[0].description.includes("rain")) {
         this.props.setBadWeather();
         this.props.fetchIndoorActivities(this.props.location, 0)
@@ -124,13 +124,19 @@ class Itinerary extends React.Component {
         let coordinateLocations = this.coordinateLocations();
         var addresses = [];
         return(
-          <div id="full-width">
-            <div id="itinerary-left-half">  
-              <div className="itinerary">
+          <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
+          <div className="box b" style={{ width: '100%', position: 'relative', height: '700px'}}>
+            <Weather name={coordinateLocations[0].location.city}/>
+            <MapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'100%'} height={'50%'}/>
+          </div>
+          <div className="box a" style={{width: '50%', padding: '30px'}}>
+              <div className="itinerary-column">
                 <h1> Itinerary </h1>
                 {this.props.activities.length > 0 ? this.props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={this.deleteActivity} key={index} name={business.name} data={business}/>) : null}
               </div>
-              <div className="food">
+            </div>
+            <div className="box c" style={{ width: '50%', padding: '30px'}}>
+              <div className="itinerary-column">
                 <h1> Food </h1>
                 {this.props.restaurants.length > 0 ? this.props.restaurants.slice(0,3).map((business,index) => 
                   <Activity 
@@ -140,12 +146,8 @@ class Itinerary extends React.Component {
                     data={business}/>
                     ) : null}
               </div>
-              <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle</button></div>
             </div>
-            <div id="right-half">   
-              <Weather name={coordinateLocations[0].location.city}/>
-              <MapContainer addresses={coordinateLocations} initialLat={coordinateLocations[0].coordinates.latitude} initialLon={coordinateLocations[0].coordinates.longitude} zoom={10} width={'40%'} height={'50%'} profile={false}/>
-            </div>
+            <div id="shuffle-button"><button onClick={this.shuffleBoth}>Shuffle</button></div>
             <div className="save-button"><button onClick={this.handleSave}>SAVE ITINERARY</button></div>
           </div>
         )

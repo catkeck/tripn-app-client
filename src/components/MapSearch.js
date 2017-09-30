@@ -10,18 +10,19 @@ class MapSearch extends React.Component {
   }
 
   render() {
-    const style = { width: '100%', height: '100%'}
+    const style = { width: '100%', height: '80%'}
     return (
       <div id="search-map">
         <Map google={this.props.google} 
           onClick={this.onMapClick} 
           style={style}  
           initialCenter={{
-            lat: 0,
+            lat: 20,
             lng: 0
           }} 
           zoom={2}>
         </Map>
+
       </div>
     );
   }

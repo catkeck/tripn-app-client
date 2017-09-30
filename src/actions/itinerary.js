@@ -98,6 +98,7 @@ export function fetchStringWeather(location) {
   }
 }
 
+
 export function fetchCoordinateWeather(location) {
   const latlon = location.split(",")
   return function(dispatch) {

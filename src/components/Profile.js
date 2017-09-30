@@ -44,31 +44,25 @@ class Profile extends React.Component {
       const tripLocations = this.getPastVisitedLocations();
       if (this.props.trips) {
         return (
-          <div id="full-width">
-            <div id="top-section">
-              <div id="left-half">
-                <div id="welcome-box">
-                  <div id="welcome-name">Welcome {this.props.username}</div>
-                  <div className="image-setup">
-                    <div className="profile-image"><img src={this.props.image} alt=""/></div>
-                    <button onClick={this.showAddImage}>Add/Hide Image</button>
-                    {this.state.displayAddImage ? <ImageDrop /> : null}
-                  </div>
-                </div>
-              </div>
-              <div id="right-half">
-                <div className="interests-box">
-                  <p>Your saved interests are: {this.props.interests.split(",").join(", ")}</p>
-                  <InterestsForm />
-                </div>
+          <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
+            <div className="box a" style={{width: '50%', padding: '30px'}}>
+              <div id="welcome-name">Welcome {this.props.username}</div>
+              <div className="image-setup">
+                <div className="profile-image"><img src={this.props.image} alt=""/></div>
+                <button onClick={this.showAddImage}>Add/Hide Image</button>
+                {this.state.displayAddImage ? <ImageDrop /> : null}
               </div>
             </div>
-              <div id="bottom-section">
-                {this.props.trips.length > 0 ? <div id="welcome-name">Saved Itineraries</div>: null }
-                <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} width={'100%'} height={'200px'} profile={true}/>
-              </div>
-              <TripsContainer trips={this.props.trips}/>
+          <div className="box c interests-box" style={{ width: '50%'}}>
+            <p>Your saved interests are: {this.props.interests.split(",").join(", ")}</p>
+            <InterestsForm />
           </div>
+          <div className="box b" style={{ width: '100%', position: 'relative', height: '700px'}}>
+            {this.props.trips.length > 0 ? <div id="welcome-name">Saved Itineraries</div>: null }
+            <MapContainer addresses={tripLocations} initialLat={0} initialLon={0} zoom={2} profile={true} width={'100%'} height={'100%'}/>
+          </div>
+          <TripsContainer trips={this.props.trips}/>
+        </div>
         )
       } else {
         return (
