@@ -819,6 +819,7 @@ input[type="password"] {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   margin-left: 20px;
   margin-bottom: 100px;
+  color: white;
 }
 
 #welcome-name {
@@ -860,3 +861,4 @@ input[type="password"] {
 .ReactModal__Overlay--after-open {
   z-index: 10;
 }
+

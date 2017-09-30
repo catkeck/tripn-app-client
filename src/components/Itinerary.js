@@ -10,15 +10,15 @@ import * as ItineraryActions from '../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0
-const OPTIONS = [
-  {label: '$', value: '1'},
-  {label: '$$', value: '2'},
-  {label: '$$$', value: '3'},
-  {label: '$$$$', value: '4'}
-]
 
 class Itinerary extends React.Component {
 
+  constructor() {
+    super()
+    this.state = {
+      savedImageData: ""
+    }
+  }
   componentDidMount() {
     const LOCATION = this.props.data.match.params.location
     console.log(LOCATION)
@@ -76,7 +76,7 @@ class Itinerary extends React.Component {
     const tripParams = {
       activities: this.props.activities.slice(0,4),
       restaurants: this.props.restaurants.slice(0,3),
-      location: this.props.location
+      location: this.props.location,
     }
     TripAdapter.saveTrip(tripParams);
   }

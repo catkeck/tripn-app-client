@@ -26,7 +26,7 @@ class Profile extends React.Component {
 
   getPastVisitedLocations = () => {
     if (this.props.trips&&this.props.trips.length > 0){
-      let tripArrayofArrays = this.props.trips.map(trip => trip[2]); 
+      let tripArrayofArrays = this.props.trips.map(trip => trip[3]); 
       let val =  [].concat.apply([], tripArrayofArrays);
       return val
     } else {
@@ -39,11 +39,14 @@ class Profile extends React.Component {
   }
 
   render() {
+
     const token = localStorage.getItem("token")
     if (token === null) {
       return <Redirect to='/'/>
     } else {
       const tripLocations = this.getPastVisitedLocations();
+      console.log(this.props.trips)
+      console.log(tripLocations)
       if (this.props.trips) {
         return (
           <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
