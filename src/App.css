@@ -274,6 +274,7 @@ body {
   grid-row: row 2 ;
   margin-top: 200px;
 }
+
 .interests-box input[type="text"],
 input[type="password"] {
   display: block;

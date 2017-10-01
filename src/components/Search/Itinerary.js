@@ -1,12 +1,12 @@
 import React from 'react'
-import TripAdapter from '../adapters/TripAdapter'
+import TripAdapter from '../../adapters/TripAdapter'
 import Weather from './Weather'
 import Activity from './Activity'
-import MapContainer from './MapContainer'
+import MapContainer from '../MapContainer'
 import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as ItineraryActions from '../actions/itinerary'
+import * as ItineraryActions from '../../actions/itinerary'
 
 var loadedActivities = 0
 var loadedRestaurants = 0

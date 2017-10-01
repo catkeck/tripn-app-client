@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import {Route, Link} from 'react-router-dom'
-import Login from './components/Login'
-import Signup from './components/Signup'
+import Login from './components/Login/Login'
+import Signup from './components/Login/Signup'
 import Navbar from './components/Navbar'
 import AuthAdapter from './adapters/AuthAdapter'
-import Profile from './components/Profile'
-import Home from './components/Home'
-import Search from './components/Search'
-import Itinerary from './components/Itinerary'
-import Contact from './components/Contact'
+import Profile from './components/Profile/Profile'
+import Home from './components/Static/Home'
+import Search from './components/Search/Search'
+import Itinerary from './components/Search/Itinerary'
+import Contact from './components/Static/Contact'
 
 class App extends Component {
 

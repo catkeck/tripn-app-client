@@ -1,13 +1,12 @@
 import React from 'react'
-import UserAdapter from '../adapters/UserAdapter'
+import UserAdapter from '../../adapters/UserAdapter'
 import TripsContainer from './TripsContainer'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 import { bindActionCreators } from 'redux'
-import * as ProfileActions from '../actions/profile'
-import {getUserData, setProfileImage, updateUserData} from '../actions/profile'
+import * as ProfileActions from '../../actions/profile'
 import InterestsForm from './InterestsForm'
-import MapContainer from './MapContainer'
+import MapContainer from '../MapContainer'
 import ImageDrop from './ImageDrop'
 
 

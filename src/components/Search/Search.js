@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as SearchActions from '../actions/search'
-import {getCurrentPosition, setSearchTerm} from '../actions/search'
+import * as SearchActions from '../../actions/search'
 import {Redirect} from 'react-router'
 import MapSearch from './MapSearch'
 

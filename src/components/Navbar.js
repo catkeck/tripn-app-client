@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import UserAdapter from '../adapters/UserAdapter'
-import TripsContainer from './TripsContainer'
+import TripsContainer from './Profile/TripsContainer'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'

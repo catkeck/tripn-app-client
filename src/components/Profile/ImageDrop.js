@@ -2,11 +2,10 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import InterestsForm from './InterestsForm'
-import MapContainer from './MapContainer'
-import UserAdapter from '../adapters/UserAdapter'
+import UserAdapter from '../../adapters/UserAdapter'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as ProfileActions from '../actions/profile'
+import * as ProfileActions from '../../actions/profile'
 
 const CLOUDINARY_UPLOAD_PRESET = 'zqvt4w5a';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/djlznf9dr/image/upload'

@@ -1,10 +1,9 @@
 import React from 'react'
-import AuthAdapter from '../adapters/AuthAdapter'
+import AuthAdapter from '../../adapters/AuthAdapter'
 import swal from 'sweetalert'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as LoginActions from '../actions/login'
-import {login,signup} from '../actions/login'
+import * as LoginActions from '../../actions/login'
 
 class Signup extends React.Component {
   constructor() {
