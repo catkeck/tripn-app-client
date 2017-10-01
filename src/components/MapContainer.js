@@ -53,6 +53,7 @@ class MapContainer extends React.Component {
     return (
        (this.props.addresses&&this.props.addresses[0] ? 
           <Map google={this.props.google} 
+            key={this.props.addresses[0].name}
             onClick={this.onMapClicked} 
             style={style}  
             initialCenter={{
