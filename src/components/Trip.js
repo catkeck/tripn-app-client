@@ -1,11 +1,7 @@
 import React from 'react'
 import TripModal from './TripModal'
 
-
-
-
 const Trip = (props) => {
-
 
   const location = props.tripData[1].replace(/\b\w/g, l => l.toUpperCase())
   const date = props.tripData[0].split("T")[0]
@@ -14,7 +10,6 @@ const Trip = (props) => {
   return (
     <div className="parent-trip">
       <div className="trip" style={{backgroundImage: `url(${props.tripData[2]})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
-        <h3>{location} ({date})</h3>
         <TripModal location={location} date={date} activities={activities} food={food}/>
       </div>
     </div>

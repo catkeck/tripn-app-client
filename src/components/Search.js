@@ -37,8 +37,8 @@ class Search extends React.Component {
       return <Redirect to='/'/>
     } else {
       return (
-        <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
-          <div className="box a" style={{width: '100%', padding: '30px'}}>
+        <div className="wrapper"> 
+          <div className="box search-box">
             <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
             <form onSubmit={this.handleSubmit}>
               <h1> Get Itinerary </h1>
@@ -47,11 +47,11 @@ class Search extends React.Component {
             </form>
             {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
           </div>
-          <div className="box b" style={{ width: '100%', position: 'relative', height: '500px'}}>
-          <h1> - OR - </h1>
-          <p> by selecting your location on the map below: </p>
-            <MapSearch history={this.props.history}/>
-          </div>
+          <div className="box map-box">
+            <h1> - OR - </h1>
+              <p> by selecting your location on the map below: </p>
+              <MapSearch history={this.props.history}/>
+          </div>`
         </div>
       )
     }
