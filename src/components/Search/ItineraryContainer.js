@@ -1,6 +1,5 @@
 import React from 'react'
 import TripAdapter from '../../adapters/TripAdapter'
-import Activity from './Activity'
 import {Redirect} from 'react-router'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'

@@ -223,7 +223,6 @@ class InterestsForm extends React.Component {
   }
 
   handleSelectChange = (value) => {
-    console.log('You\'ve selected:', value);
     this.setState({value});
   }
 
@@ -239,7 +238,6 @@ class InterestsForm extends React.Component {
   }
 
   handleClick = () => {
-    console.log(this.state.value)
     UserAdapter.saveUserInterests(this.state.value).then(data => this.props.updateUserData(data))
   }
 

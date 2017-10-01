@@ -6,9 +6,9 @@ const Search = (props) => {
   const handleDetectLocation = () => {
     props.handleDetectLocation()
   }
-console.log(props)
+
   return (
-    
+
     <div className="wrapper"> 
       <div className="box search-box">
         <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
