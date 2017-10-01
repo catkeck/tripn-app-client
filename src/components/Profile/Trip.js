@@ -1,5 +1,5 @@
 import React from 'react'
-import TripModal from './TripModal'
+import TripModalContainer from './TripModalContainer'
 
 const Trip = (props) => {
 
@@ -10,7 +10,7 @@ const Trip = (props) => {
   return (
     <div className="parent-trip">
       <div className="trip" style={{backgroundImage: `url(${props.tripData[2]})`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
-        <TripModal location={location} date={date} activities={activities} food={food}/>
+        <TripModalContainer location={location} date={date} activities={activities} food={food}/>
       </div>
     </div>
   )

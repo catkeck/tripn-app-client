@@ -6,8 +6,6 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as ProfileActions from '../actions/profile'
 import * as LoginActions from '../actions/login'
-import {getUserData} from '../actions/profile'
-import {logout} from '../actions/login'
 
 class NavBar extends React.Component {
   

@@ -1,74 +1,31 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import { bindActionCreators } from 'redux'
-import * as SearchActions from '../../actions/search'
-import {Redirect} from 'react-router'
 import MapSearch from './MapSearch'
 
-class Search extends React.Component {
+const Search = (props) => {
 
-  handleSelectChange = (value) => {
-    this.setState({value});
+  const handleDetectLocation = () => {
+    props.handleDetectLocation()
   }
-
-  handleChange = (event) => {
-    this.props.setSearchTerm(event.target.value)
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.history.history.push(`/search/${this.props.searchTerm.replace(',','')}`)
-  }
-
-  handleDetectLocation = (event) => {
-    event.preventDefault();
-    this.props.history.history.push(`/search/${this.props.coordinates}`)
-  }
-
-  componentDidMount() {
-    this.props.getCurrentPosition();
-  }
-
-  render() {
-    const token = localStorage.getItem("token")
-
-    if (token === null) {
-      return <Redirect to='/'/>
-    } else {
-      return (
-        <div className="wrapper"> 
-          <div className="box search-box">
-            <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
-            <form onSubmit={this.handleSubmit}>
-              <h1> Get Itinerary </h1>
-              <input type="text" value={this.props.searchTerm} onChange={this.handleChange} style={{ margin: '0 auto'}}/>
-              <input type="submit"/>
-            </form>
-            {this.props.showButton ? <div className="pad-button"><button onClick={this.handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
-          </div>
-          <div className="box map-box">
-            <h1> - OR - </h1>
-              <p> by selecting your location on the map below: </p>
-              <MapSearch history={this.props.history}/>
-          </div>`
-        </div>
-      )
-    }
-  }
+console.log(props)
+  return (
+    
+    <div className="wrapper"> 
+      <div className="box search-box">
+        <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
+        <form onSubmit={props.handleSubmit}>
+          <h1> Get Itinerary </h1>
+          <input type="text" value={props.searchTerm} onChange={props.handleChange} style={{ margin: '0 auto'}}/>
+          <input type="submit"/>
+        </form>
+        {props.showButton ? <div className="pad-button"><button onClick={handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
+      </div>
+      <div className="box map-box" >
+        <h1> - OR - </h1>
+        <p> by selecting your location on the map below: </p>
+        <MapSearch history={props.history}/>
+      </div>`
+    </div>
+  )
 }
 
-function mapStateToProps(state) {
-  return {
-    coordinates: state.search.coordinates,
-    searchTerm: state.search.searchTerm,
-    showButton: state.search.showButton,
-    isLoading: state.search.isLoading
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(SearchActions, dispatch)
-}
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Search)
+export default Search

@@ -1,7 +1,6 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
-import InterestsForm from './InterestsForm'
 import UserAdapter from '../../adapters/UserAdapter'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'

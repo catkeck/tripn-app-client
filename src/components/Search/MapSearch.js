@@ -10,7 +10,7 @@ class MapSearch extends React.Component {
   }
 
   render() {
-    const style = { width: '100%', height: '100%'}
+    const style = {width: '100%', height: '100%', display: 'flex', flexWrap: 'wrap', maxWidth: '1000px', margin: '0 auto', position: 'relative'}
     return (
       <div id="search-map">
         <Map google={this.props.google} 

@@ -5,10 +5,10 @@ import Login from './components/Login/Login'
 import Signup from './components/Login/Signup'
 import Navbar from './components/Navbar'
 import AuthAdapter from './adapters/AuthAdapter'
-import Profile from './components/Profile/Profile'
+import ProfileContainer from './components/Profile/ProfileContainer'
 import Home from './components/Static/Home'
-import Search from './components/Search/Search'
-import Itinerary from './components/Search/Itinerary'
+import SearchContainer from './components/Search/SearchContainer'
+import ItineraryContainer from './components/Search/ItineraryContainer'
 import Contact from './components/Static/Contact'
 
 class App extends Component {
@@ -21,12 +21,11 @@ class App extends Component {
           <Navbar />
         </div>
         <Route exact path={'/'} component={Home}/>
-        <Route exact path={'/profile'} render={(history) => <Profile history={history}/>}/>
+        <Route exact path={'/profile'} render={(history) => <ProfileContainer history={history}/>}/>
         <Route exact path={'/login'} render={({history}) => <Login history={history}/>}/>
-        <Route exact path={'/search'} render={(history) => <Search history={history}/>}/>
+        <Route exact path={'/search'} render={(history) => <SearchContainer history={history}/>}/>
         <Route exact path={'/signup'} render={({history}) => <Signup history={history} handleLoginAndSignup={this.handleLoginAndSignup}/>}/>
-        <Route path={'/search/:location'} render={(match) => <Itinerary data={match}/>}/>
-        <Route path={'/search/:location/:from/:to'} render={(match) => <Itinerary data={match}/>}/>
+        <Route path={'/search/:location'} render={(match) => <ItineraryContainer data={match}/>}/>
         <Route exact path={'/contactus'} component={Contact}/>
         <div className="footer">
           <div className="auth-links"> 

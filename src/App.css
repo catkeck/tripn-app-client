@@ -182,6 +182,10 @@ input[type="submit"]:active {
   width: 50%;
 }
 
+.activity-info p{
+  text-align: center;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -326,7 +330,7 @@ input[type="password"] {
 }
 
 .list-images img{
-  width: 40%;
+  width: 50%;
   border-radius: 25px;
   max-height: 300px;
   float: left;
@@ -383,7 +387,7 @@ input[type="password"] {
 }
 
 .modal-images img{
-  width: 30%;
+  width: 40%;
   border-radius: 25px;
   max-height: 250px;
   float: left;
@@ -394,7 +398,7 @@ input[type="password"] {
   padding-bottom: 20px;
   margin-bottom: 20px;
   text-align: left;
-  margin-left:20%;
+  margin-left:10%;
 }
 
 .module > label > h1 {
@@ -823,13 +827,24 @@ input[type="password"] {
 }
 
 #shuffle-button {
-  padding-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width:20%;
+
+}
+
+#shuffle-button button {
+  font-size: 20px;
+  padding: 20px;
+  padding-bottom: 40px
 }
 
 .trips {
-  padding-left: 10%;
-  padding-right: 10%;
   padding-top: 15%;
+  width: 960px;
+  padding-bottom: 10%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .weather {
