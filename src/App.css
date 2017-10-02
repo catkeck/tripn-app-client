@@ -259,11 +259,16 @@ body {
   padding-top: 50px;
 }
 
-.home {
+#home {
   width: 100%;
+
 }
 
-.home img {
+#home p {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+#home img {
   width:100%;
 }
 
@@ -332,7 +337,7 @@ input[type="password"] {
 .list-images img{
   width: 50%;
   border-radius: 25px;
-  max-height: 300px;
+  max-height: 250px;
   float: left;
   text-align: left;
 }
@@ -361,6 +366,7 @@ input[type="password"] {
   width: 100%;
   position: relative;
   height: 500px;
+  border-radius: 5px;
   
 }
 
@@ -428,35 +434,24 @@ input[type="password"] {
   margin: 10px;
   position: relative;
   overflow:hidden;
-
-}
-
-.profile-image {
-  width:100%;
-}
-
-.trip {
-  margin: 5% auto;
-  width: 300px;
-  height: 400px;
-  background-color: black;
-  padding: 40px;
-  color: white;
-  background-size: cover;
+  border-radius: 5px;
 }
 
 .parent-trip:hover .trip:hover,
 .parent-trip:focus .trip:focus {
   transform: scale(1.2);
   transition: all .5s;
+  border-radius: 5px;
 }
 
 .profile-image {
   float: left;
+  width:100%;
 }
 
 .profile-image img {
   width:50%;
+  border-radius: 10px;
 }
 
 #react-modal h1, h2, h3{
@@ -488,6 +483,7 @@ input[type="password"] {
   font-size: 20px;
   padding: 20px;
   padding-bottom: 40px;
+  margin-right: 0px;
 
 }
 
@@ -502,6 +498,7 @@ input[type="password"] {
   padding-top: 50px;
   position: relative;
   height: 500px;
+  border-radius: 5px;
 }
 
 .search-box {
@@ -837,6 +834,17 @@ input[type="password"] {
   font-size: 20px;
   padding: 20px;
   padding-bottom: 40px
+}
+
+.trip {
+  margin: 5% auto;
+  width: 300px;
+  height: 400px;
+  background-color: black;
+  padding: 40px;
+  color: white;
+  background-size: cover;
+  border-radius: 10px;
 }
 
 .trips {

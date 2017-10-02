@@ -10,6 +10,9 @@ const Search = (props) => {
   return (
 
     <div className="wrapper"> 
+      <div id="home">
+       <img src='./cave.jpg' alt=''/>
+      </div>
       <div className="box search-box">
         <p> Discover today's itinerary by entering a location below/clicking the current location button:</p>
         <form onSubmit={props.handleSubmit}>
