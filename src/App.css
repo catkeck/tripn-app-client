@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -92,6 +93,7 @@ input[type="password"] {
   font-weight: 400;
   font-size: 15px;
   transition: 0.2s ease;
+  text-align: center;
 }
 
 input[type="text"]:focus,
@@ -193,6 +195,7 @@ body {
   color: #222;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  background-color: #f3f3f3;
 }
 
 .box {
@@ -298,6 +301,7 @@ input[type="password"] {
   font-weight: 400;
 /*  font-size: 20px;*/
   transition: 0.2s ease;
+  text-align: center;
 }
 
 .interests-box input[type="submit"], input[type="reset"] {
@@ -886,7 +890,6 @@ input[type="password"] {
   grid-gap: 10px;
   grid-template-columns: [col] 100px [col] 100px [col] 100px [col] 100px  ;
   grid-template-rows: [row] auto [row] auto [row] ;
-  background-color: #fff;
   color: #444;
   margin: 0 auto;
 }
