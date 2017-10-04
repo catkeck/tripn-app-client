@@ -19,15 +19,15 @@ function itineraryReducer(state = {activities: [], restaurants: [], weather: {},
     case "REMOVE_RESTAURANT":
       return Object.assign({}, state, {restaurants: state.restaurants.filter((element) => element.name !== action.payload)})
     case "FETCHING_WEATHER":
-      return Object.assign({}, state, { isLoading: true })
+      return Object.assign({}, state, {isLoading: true })
     case "FETCHED_WEATHER":
-      return Object.assign({}, state, { weather: action.payload, isLoading: false })
+      return Object.assign({}, state, {weather: action.payload, isLoading: false })
     case "SET_BAD_WEATHER":
       return Object.assign({}, state, {badWeather: true})
     case "SET_LOCATION":
       return Object.assign({}, state, {location: action.payload})
     case "SHUFFLE_ALL":
-      return Object.assign({}, state, { restaurants: shuffleItems(state.restaurants), activities: shuffleItems(state.activities)})
+      return Object.assign({}, state, {restaurants: shuffleItems(state.restaurants), activities: shuffleItems(state.activities)})
     default:
       return state
   }

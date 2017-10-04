@@ -19,7 +19,6 @@ class ItineraryContainer extends React.Component {
   }
   componentDidMount() {
     const LOCATION = this.props.data.match.params.location
-    console.log(LOCATION)
     this.props.fetchActivities(LOCATION, 0)
     this.props.fetchRestaurants(LOCATION, 0)
     if (isNaN(LOCATION.charAt(0))) {
@@ -76,7 +75,9 @@ class ItineraryContainer extends React.Component {
       restaurants: this.props.restaurants.slice(0,3),
       location: this.props.location,
     }
+    console.log("trip params", tripParams)
     TripAdapter.saveTrip(tripParams);
+
   }
 
   coordinateLocations = () => {
@@ -93,7 +94,6 @@ class ItineraryContainer extends React.Component {
 
   handlePriceFilter = (event) => {
     let options = event.target.options;
-    console.log(options)
     var value = [];
     for (var i = 0, l = options.length; i < l; i++) {
       if (options[i].selected) {
@@ -104,7 +104,9 @@ class ItineraryContainer extends React.Component {
   }
  
   render() {
+    const LOCATION = this.props.data.match.params.location
     const token = localStorage.getItem("token")
+    const showUber = isNaN(LOCATION.charAt(0)) ? false : true
     if (token === null) {
       return <Redirect to='/'/>
     }
@@ -120,7 +122,7 @@ class ItineraryContainer extends React.Component {
         let coordinateLocations = this.coordinateLocations();
         var addresses = [];
         return(
-          <Itinerary coordinateLocations={coordinateLocations} activities={this.props.activities} restaurants={this.props.restaurants} shuffleBoth={this.shuffleBoth} handleSave={this.handleSave} deleteRestaurant={this.deleteRestaurant} deleteActivity={this.deleteActivity}/>
+          <Itinerary coordinateLocations={coordinateLocations} activities={this.props.activities} restaurants={this.props.restaurants} shuffleBoth={this.shuffleBoth} handleSave={this.handleSave} deleteRestaurant={this.deleteRestaurant} deleteActivity={this.deleteActivity} currentLocation={this.props.coordinates} showUber={showUber}/>
         )
       } else {
         return (
@@ -142,7 +144,8 @@ function mapStateToProps(state) {
     badWeather: state.itinerary.badWeather,
     location: state.itinerary.location,
     moreActivities: state.itinerary.moreActivities,
-    moreRestaurants: state.itinerary.moreRestaurants
+    moreRestaurants: state.itinerary.moreRestaurants,
+    coordinates: state.search.coordinates
   }
 }
 

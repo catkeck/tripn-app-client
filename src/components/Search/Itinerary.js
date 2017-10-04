@@ -7,16 +7,27 @@ const Itinerary = (props) => {
   return(
     <div className="wrapper" style={{display: 'flex', flexWrap: 'wrap', width: '100%', maxWidth: '1000px', margin: '0 auto'}}> 
     <div className="box b" style={{ width: '100%', position: 'relative', height: '700px'}}>
+
       <WeatherContainer name={props.coordinateLocations[0].location.city}/>
+      <h1> Your itinerary below was specially tailored based on your interests and today's weather</h1>
       <MapContainer addresses={props.coordinateLocations} initialLat={props.coordinateLocations[0].coordinates.latitude} initialLon={props.coordinateLocations[0].coordinates.longitude} zoom={10} width={'100%'} height={'50%'}/>
     </div>
-    <div className="box a" style={{width: '50%', padding: '30px'}}>
+    <div className="box a" style={{width: '50%', padding: '30px', paddingTop: '6%'}}>
         <div className="itinerary-column">
           <h1> Itinerary </h1>
-          {props.activities.length > 0 ? props.activities.slice(0,4).map((business,index) => <Activity deleteActivity={props.deleteActivity} key={index} name={business.name} data={business}/>) : null}
+          {props.activities.length > 0 ? props.activities.slice(0,4).map((business,index) => 
+            <Activity 
+              deleteActivity={props.deleteActivity} 
+              key={index} 
+              name={business.name} 
+              data={business}
+              coordinates={business.coordinates}
+              currentLocation={props.currentLocation}
+              showUber={props.showUber}/>
+              ) : null}
         </div>
       </div>
-      <div className="box c" style={{ width: '50%', padding: '30px'}}>
+      <div className="box c" style={{ width: '50%', padding: '30px', paddingTop: '6%'}}>
         <div className="itinerary-column">
           <h1> Food </h1>
           {props.restaurants.length > 0 ? props.restaurants.slice(0,3).map((business,index) => 
@@ -24,7 +35,10 @@ const Itinerary = (props) => {
               deleteActivity={props.deleteRestaurant} 
               key={index} 
               name={business.name} 
-              data={business}/>
+              data={business}
+              coordinates={business.coordinates}
+              currentLocation={props.currentLocation}
+              showUber={props.showUber}/>
               ) : null}
         </div>
       </div>

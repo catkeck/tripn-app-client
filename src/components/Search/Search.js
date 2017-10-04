@@ -20,7 +20,7 @@ const Search = (props) => {
           <input type="text" value={props.searchTerm} onChange={props.handleChange} style={{ margin: '0 auto'}}/>
           <input type="submit"/>
         </form>
-        {props.showButton ? <div className="pad-button"><button onClick={handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : null }
+        {props.showButton ? <div className="pad-button"><button onClick={handleDetectLocation}>SEARCH CURRENT LOCATION</button></div> : <p> Just wait and you can search off your current location! </p> }
       </div>
       <div className="box map-box" >
         <h1> - OR - </h1>

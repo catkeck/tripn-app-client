@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@zalando/oauth2-client-js": "0.0.18",
     "axios": "^0.16.2",
     "create-react-class": "^15.6.2",
     "goog-places-api": "0.0.3",
@@ -19,8 +20,11 @@
     "react-dropzone": "^4.1.3",
     "react-facebook-login-component": "^0.9.0",
     "react-file-base64": "^1.0.3",
+    "react-iframe": "^1.0.7",
     "react-modal": "^2.3.2",
+    "react-popup": "^0.8.0",
     "react-redux": "^5.0.6",
+    "react-redux-popup": "^2.1.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.13",
@@ -30,6 +34,8 @@
     "react-weathericons": "^1.0.4",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
+    "redux-localstorage": "^0.4.1",
+    "redux-persist": "^4.10.1",
     "redux-thunk": "^2.2.0",
     "sugar": "^2.0.4",
     "sweetalert": "^2.0.3"

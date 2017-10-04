@@ -10,6 +10,7 @@ import Home from './components/Static/Home'
 import SearchContainer from './components/Search/SearchContainer'
 import ItineraryContainer from './components/Search/ItineraryContainer'
 import Contact from './components/Static/Contact'
+import AuthUber from './components/Uber/AuthUber'
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
         <Route exact path={'/signup'} render={({history}) => <Signup history={history} handleLoginAndSignup={this.handleLoginAndSignup}/>}/>
         <Route path={'/search/:location'} render={(match) => <ItineraryContainer data={match}/>}/>
         <Route exact path={'/contactus'} component={Contact}/>
+        <Route path={'/uber'} render={(match) => <AuthUber code={match}/>}/>
         <div className="footer">
           <div className="auth-links"> 
             <Link to={'/contactus'}> Contact Us</Link>

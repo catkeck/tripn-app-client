@@ -34,7 +34,7 @@ class SearchContainer extends React.Component {
       return <Redirect to='/'/>
     } else {
       return (
-        <Search handleSubmit={this.handleSubmit} searchTerm={this.props.searchTerm} handleChange={this.handleChange} handleDetectLocation={this.handleDetectLocation} history={this.props.history} showButton={this.props.showButton} />
+        <Search handleSubmit={this.handleSubmit} searchTerm={this.props.searchTerm} handleChange={this.handleChange} handleDetectLocation={this.handleDetectLocation} history={this.props.history} showButton={this.props.showButton} coordinates={this.props.coordinates} />
       )
     }
   }

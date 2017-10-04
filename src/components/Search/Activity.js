@@ -1,4 +1,5 @@
 import React from 'react'
+import Uber from '../Uber/Uber'
 
 const Activity = (props) => {
 
@@ -19,6 +20,7 @@ const Activity = (props) => {
         <p>{props.data.location ? props.data.location.display_address.join(" ") : null}</p>
         <p>{props.data.display_phone}</p>
         <p>{props.data.price ? `Price: ${props.data.price}` : null}</p>
+        {props.showUber ? <Uber currentLocation={props.currentLocation} coordinates={props.data.coordinates} /> : null}
       </div>
     </div>
   )

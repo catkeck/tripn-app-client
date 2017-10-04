@@ -1,9 +1,9 @@
-function searchReducer(state = {coordinates: "", searchTerm: "", showButton: false, isLoading: false}, action) {
+function searchReducer(state = {coordinates: "", latitude: "", longitude: "", searchTerm: "", showButton: false, isLoading: false}, action) {
   switch(action.type) {
     case "FETCHING_POSITION":
       return Object.assign({}, state, {isLoading: true})
     case "FETCHED_POSITION":
-      return Object.assign({}, state, {coordinates: `${action.payload.coords.latitude},${action.payload.coords.longitude}`, showButton: true, isLoading: false})
+      return Object.assign({}, state, {coordinates: `${action.payload.coords.latitude},${action.payload.coords.longitude}`, latitude: action.payload.coords.latitude, longitude: action.payload.coords.longitude, showButton: true, isLoading: false})
     case "SET_SEARCH_TERM":
       return Object.assign({}, state, {searchTerm: action.payload})
     default:

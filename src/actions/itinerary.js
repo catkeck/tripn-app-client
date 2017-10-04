@@ -1,7 +1,7 @@
 import TripAdapter from '../adapters/TripAdapter'
 
 export function fetchActivities(location) {
-  console.log(location)
+  // console.log(location)
   return function(dispatch) {
     dispatch({type:"FETCHING_ACTIVITIES"})
     TripAdapter.getActivities(location, 0)
@@ -23,7 +23,7 @@ export function fetchIndoorActivities(location) {
     dispatch({type:"FETCHING_ACTIVITIES"})
     TripAdapter.getIndoorActivities(location, 0)
       .then(activities => {
-        console.log(activities)
+        // console.log(activities)
         dispatch({type: "FETCHED_ACTIVITIES", payload: activities.businesses.businesses})
       })
   }
