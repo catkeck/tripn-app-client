@@ -20,7 +20,7 @@ class SearchContainer extends React.Component {
   }
 
   handleDetectLocation = (event) => {
-    this.props.history.history.push(`/search/${this.props.coordinates}`)
+    this.props.history.history.push(`/search/${this.props.coordinates}?currentLocation`)
   }
 
   componentDidMount() {

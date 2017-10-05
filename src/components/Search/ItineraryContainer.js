@@ -18,6 +18,7 @@ class ItineraryContainer extends React.Component {
     }
   }
   componentDidMount() {
+    console.log(this.props.data.match.params)
     const LOCATION = this.props.data.match.params.location
     this.props.fetchActivities(LOCATION, 0)
     this.props.fetchRestaurants(LOCATION, 0)

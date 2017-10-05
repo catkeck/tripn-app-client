@@ -6,7 +6,6 @@ export default class TripAdapter {
 
 
   static getActivities(location, offset) {
-    // console.log(location)
     const token =localStorage.getItem("token")
     const activityParams = {
       method: 'post',

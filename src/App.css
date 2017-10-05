@@ -202,6 +202,15 @@ body {
   background-color: #f3f3f3;
 }
 
+#book-ride {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  border-radius: 5px 5px 0px 0px;
+  margin-bottom: 30px;
+}
+
 .box {
   width: 50%;
   z-index: 2;
@@ -338,8 +347,7 @@ input[type="password"] {
 }
 
 .list-images {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .list-images img{
@@ -443,15 +451,20 @@ input[type="password"] {
   position: relative;
   overflow:hidden;
   border-radius: 5px;
+  transition: all 1s ease-in-out;
 }
 
 .parent-trip:hover .trip:hover,
 .parent-trip:focus .trip:focus {
   transform: scale(1.2);
-  transition: all .5s;
   border-radius: 5px;
 }
 
+.product-cards {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .profile-image {
   float: left;
   width:100%;
@@ -855,7 +868,7 @@ input[type="password"] {
 }
 
 .trip {
-  margin: 5% auto;
+  margin: auto;
   width: 300px;
   height: 400px;
   background-color: black;
@@ -863,6 +876,7 @@ input[type="password"] {
   color: white;
   background-size: cover;
   border-radius: 10px;
+  transition: all 1s ease-in-out;
 }
 
 .trips {
@@ -873,15 +887,33 @@ input[type="password"] {
   margin-right: auto;
 }
 
+.uber-box {
+  margin: 5% auto;
+  width: 300px;
+  height: 420px;
+  background-color: white;
+  padding: 10px;
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  float: left;
+  margin-left: 20px;
+}
+
+.uber-button {
+  padding-top: 10px;
+}
+.uber-button img{
+  width:210px;
+}
+
 .uber-image img{
   width: 50px;
 }
 
 .uber-info {
-  float: left;
-  padding-left: 20px;
-  width: 33%;
-  padding-top: 2%;
+  padding: 20px;
+  width: 100%%;
 }
 .weather {
   padding-right: 20%;

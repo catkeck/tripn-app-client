@@ -1,6 +1,4 @@
 import React from 'react'
-import AuthAdapter from '../../adapters/AuthAdapter'
-import swal from 'sweetalert'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as LoginActions from '../../actions/login'

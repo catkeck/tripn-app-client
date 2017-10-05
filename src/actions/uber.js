@@ -28,26 +28,8 @@ export function getProducts(token, latitude, longitude) {
   return function(dispatch) {
     UberAdapter.getProducts(token, latitude, longitude)
     .then(json => {
-      debugger
       dispatch({type: "GOT_PRODUCT_OPTIONS", payload: json})
     })
   }
 }
 
-export function getPriceEstimate(accessToken, startLatitude, startLongitude, endLatitude, endLongitude) {
-  return function(dispatch) {
-    UberAdapter.getPriceEstimate(accessToken, startLatitude, startLongitude, endLatitude, endLongitude)
-    .then(json => {
-      dispatch({type: "GOT_PRICE_ESTIMATE", payload: json})
-    })
-  }
-}
-
-export function bookRide(accessToken, fare_id, startLatitude, startLongitude, endLatitude,endLongitude) {
-  return function(dispatch) {
-    UberAdapter.bookRide(accessToken, fare_id, startLatitude, startLongitude, endLatitude, endLongitude)
-    .then(json => {
-      dispatch({type: "STATUS_RIDE_REQUEST", payload: json})
-    })
-  }
-}

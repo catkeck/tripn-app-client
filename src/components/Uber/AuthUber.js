@@ -36,19 +36,26 @@ class AuthUber extends React.Component {
   render() { 
     if (this.props.products && this.props.products.length > 0 && this.props.accessToken.access_token.length > 0 ) {
       return(
-        <div> {this.props.products.map(product => <UberProduct 
-          display_name={product.display_name}
-          image={product.image}
-          capacity={product.capacity}
-          description={product.description}
-          price_details={product.price_details}
-          product_group={product.product_group}
-          product_id={product.product_id}
-          token={this.props.accessToken.access_token}
-          currentLatitude={this.state.currentLatitude}
-          currentLongitude={this.state.currentLongitude}
-          desiredLatitude={this.state.desiredLatitude}
-          desiredLongitude={this.state.desiredLongitude}/>)} </div>
+        <div>
+          <div id="home">
+            <img src='../travel.jpg' alt=''/>
+          </div>
+          <div className="product-cards">
+            
+           {this.props.products.map(product => <UberProduct 
+            display_name={product.display_name}
+            image={product.image}
+            capacity={product.capacity}
+            description={product.description}
+            price_details={product.price_details}
+            product_group={product.product_group}
+            product_id={product.product_id}
+            token={this.props.accessToken.access_token}
+            currentLatitude={this.state.currentLatitude}
+            currentLongitude={this.state.currentLongitude}
+            desiredLatitude={this.state.desiredLatitude}
+            desiredLongitude={this.state.desiredLongitude}/>)} </div>
+        </div>
       )
     } else {
       return (

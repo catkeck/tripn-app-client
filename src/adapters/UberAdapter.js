@@ -34,7 +34,7 @@ export default class UberAdapter {
 
   }
 
-  static getPriceEstimate(accessToken, startLatitude, startLongitude, endLatitude, endLongitude) {
+  static getPriceEstimate(productId, accessToken, startLatitude, startLongitude, endLatitude, endLongitude) {
     const token = localStorage.getItem("token")
     const pricingParams = {
       method: 'POST',
@@ -42,7 +42,7 @@ export default class UberAdapter {
         'Authorization': token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({accessToken: accessToken, startLatitude: startLatitude, startLongitude: startLongitude, endLatitude: endLatitude, endLongitude: endLongitude})
+      body: JSON.stringify({productId: productId, accessToken: accessToken, startLatitude: startLatitude, startLongitude: startLongitude, endLatitude: endLatitude, endLongitude: endLongitude})
     }
     return fetch(`${UberAdapter.baseUrl()}/get_price_estimate`, pricingParams).then(resp => resp.json())
 

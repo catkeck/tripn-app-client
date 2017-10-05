@@ -29,7 +29,9 @@ class Uber extends React.Component {
   render() {
     return(
       <div className="uber-button">
-        <button onClick={this.saveCoordinates}><a href='https://login.uber.com/oauth/v2/authorize?client_id=SPJ6ABS79wvt56KnjwID5WdjTXNE-DIS&response_type=code&scope=request%20ride_widgets' target="_blank">Uber</a></button> 
+        <a href='https://login.uber.com/oauth/v2/authorize?client_id=SPJ6ABS79wvt56KnjwID5WdjTXNE-DIS&response_type=code&scope=request%20ride_widgets' target="_blank_">
+          <img src= '../uberbutton.jpg' alt='' onClick={this.saveCoordinates}/>
+        </a>
       </div>
     )
   }
