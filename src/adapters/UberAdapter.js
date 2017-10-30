@@ -1,4 +1,4 @@
-const URL = 'https://tripn-app-api.herokuapp.com/api/v1/';
+const URL = 'https://tripn-api.herokuapp.com/api/v1/';
 
 export default class UberAdapter {
   

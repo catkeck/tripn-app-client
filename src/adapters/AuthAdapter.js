@@ -12,14 +12,14 @@ export default class AuthAdapter {
         "Accept": "application/json"
       }
     }
-    return fetch(`https://tripn-app-api.herokuapp.com/api/v1/login`, request)
+    return fetch(`https://tripn-api.herokuapp.com/api/v1/login`, request)
       .then(res => res.json())
   }
 
   static signup(userParams) {
     const userJSON = JSON.stringify(userParams)
     debugger
-    return fetch('https://tripn-app-api.herokuapp.com/api/v1/signup', {
+    return fetch('https://tripn-api.herokuapp.com/api/v1/signup', {
       method: 'POST',
       body: userJSON,
       headers: {

@@ -1,7 +1,7 @@
 export default class TripAdapter {
 
   static baseUrl() {
-    return 'https://tripn-app-api.herokuapp.com/api/v1/'   
+    return 'https://tripn-api.herokuapp.com/api/v1/'   
   }
 
 
