@@ -16,6 +16,7 @@ class SearchContainer extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.setSearchTerm("")
     this.props.history.history.push(`/search/${this.props.searchTerm.replace(',','')}`)
   }
 

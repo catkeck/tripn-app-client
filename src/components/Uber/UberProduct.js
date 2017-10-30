@@ -7,9 +7,33 @@ import UberModalContainer from './UberModalContainer'
 import swal from 'sweetalert'
 
 class UberProduct extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      showUberButton: false
+    }
+  }
+
+ handleShowButton = () => {
+    this.setState({ showUberButton: true });
+  }
+  
+  handleCloseButton = () => {
+    this.setState({ showUberButton: false });
+  }
+  
 
   getPriceEstimate = () => {
     this.props.getPriceEstimate(this.props.product_id, this.props.token,this.props.currentLatitude,this.props.currentLongitude,this.props.desiredLatitude,this.props.desiredLongitude)
+    this.handleCloseButton();
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.pricing.fare && (this.props.product_id === this.props.product)) {
+      this.handleShowButton();
+    } else {
+      this.handleCloseButton();
+    }
   }
 
   bookRide = () => {
@@ -37,7 +61,7 @@ class UberProduct extends React.Component {
           <div className="pad-button">
             <button onClick={this.getPriceEstimate}>GET ESTIMATE</button>
           </div>
-          {this.props.pricing.fare ? <UberModalContainer pricing={this.props.pricing} bookRide={this.bookRide} rideStatus={this.props.rideStatus}/> : null}
+          {this.state.showUberButton ? <UberModalContainer pricing={this.props.pricing} bookRide={this.bookRide} rideStatus={this.props.rideStatus} closeButton={this.handleCloseButton}/> : null}
           </div>
         </div>
        
@@ -49,7 +73,8 @@ class UberProduct extends React.Component {
 function mapStateToProps(state) {
   return {
     pricing: state.uberRide.pricing,
-    rideStatus: state.uberRide.rideStatus
+    rideStatus: state.uberRide.rideStatus,
+    product: state.uberRide.product_id
   }
 }
 

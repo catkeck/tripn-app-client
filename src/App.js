@@ -11,10 +11,9 @@ import SearchContainer from './components/Search/SearchContainer'
 import ItineraryContainer from './components/Search/ItineraryContainer'
 import Contact from './components/Static/Contact'
 import AuthUber from './components/Uber/AuthUber'
+require('dotenv').config()
 
 class App extends Component {
-
-
   render() {
     return (
       <div className="App">

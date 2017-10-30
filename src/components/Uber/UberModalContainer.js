@@ -21,7 +21,7 @@ class UberModalContainer extends React.Component {
   
   render () {
     return (
-      <UberModal handleOpenModal={this.handleOpenModal} handleCloseModal={this.handleCloseModal}  isOpen={this.state.showModal} pricing={this.props.pricing} bookRide={this.props.bookRide} rideStatus={this.props.rideStatus}/>
+      <UberModal handleOpenModal={this.handleOpenModal} handleCloseModal={this.handleCloseModal}  isOpen={this.state.showModal} pricing={this.props.pricing} bookRide={this.props.bookRide} rideStatus={this.props.rideStatus} handleCloseButton={this.props.handleCloseButton}/>
     )
   }
 

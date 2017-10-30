@@ -1,7 +1,7 @@
 export default class TripAdapter {
 
   static baseUrl() {
-    return 'http://localhost:3000/api/v1/'   
+    return 'https://git.heroku.com/tripn-api.git/api/v1/'   
   }
 
 

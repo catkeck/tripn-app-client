@@ -40,8 +40,7 @@ class AuthUber extends React.Component {
           <div id="home">
             <img src='../travel.jpg' alt=''/>
           </div>
-          <div className="product-cards">
-            
+          <div className="product-cards">            
            {this.props.products.map(product => <UberProduct 
             display_name={product.display_name}
             image={product.image}

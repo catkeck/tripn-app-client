@@ -6,6 +6,7 @@
     "@zalando/oauth2-client-js": "0.0.18",
     "axios": "^0.16.2",
     "create-react-class": "^15.6.2",
+    "dotenv": "^4.0.0",
     "goog-places-api": "0.0.3",
     "google-maps-react": "^1.1.0",
     "jquery": "^3.2.1",
@@ -47,6 +48,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1"
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "dotenv-webpack": "^1.5.4"
   }
 }

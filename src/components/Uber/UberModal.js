@@ -27,23 +27,31 @@ import ReactModal from 'react-modal'
     }
   }
 
-const UberModal = (props) => {
-  return (
+class UberModal extends React.Component {
+
+  closeAll = () => {
+    this.props.handleCloseModal();
+  }
+
+  render() {
+    return (
     <div className="details" >
-      <button id="book-ride" onClick={props.handleOpenModal}>VIEW TRIP DETAILS</button>
+      <button id="book-ride" onClick={this.props.handleOpenModal}>VIEW TRIP DETAILS</button>
       <ReactModal 
-        isOpen={props.isOpen}
+        isOpen={this.props.isOpen}
         style={styles}>
         <div id="react-modal">
-          <h1>Estimated Cost: {props.pricing.fare.display} {props.pricing.fare.currency_code}</h1>
-          <h2>Distance: {props.pricing.trip.distance_estimate} {props.pricing.trip.distance_unit}s</h2>
-          <h2>Approximate Length of Trip: {props.pricing.trip.duration_estimate}seconds</h2>
-          <button id="book-ride" onClick={props.bookRide}>Book Ride</button>
-          <button id="close-button" onClick={props.handleCloseModal}>Close</button>
+          <h1>Estimated Cost: {this.props.pricing.fare.display} {this.props.pricing.fare.currency_code}</h1>
+          <h2>Distance: {this.props.pricing.trip.distance_estimate} {this.props.pricing.trip.distance_unit}s</h2>
+          <h2>Approximate Length of Trip: {this.props.pricing.trip.duration_estimate}seconds</h2>
+          <button id="book-ride" onClick={this.props.bookRide}>Book Ride</button>
+          <button id="close-button" onClick={this.closeAll}>Close</button>
         </div>
       </ReactModal>
     </div>
   )
+  }
+  
 }
 
 export default UberModal

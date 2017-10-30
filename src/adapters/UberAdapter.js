@@ -1,7 +1,9 @@
-export default class UberAdapter {
+const URL = 'https://git.heroku.com/tripn-api.git/api/v1/';
 
+export default class UberAdapter {
+  
   static baseUrl() {
-    return 'http://localhost:3000/api/v1/tinydancer'   
+    return `${URL}/tinydancer`   
   }
 
   static getAccessToken(code) {

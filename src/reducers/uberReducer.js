@@ -11,7 +11,6 @@ function uberReducer(state = {costs: {}, latitude: "", longitude: "", access_tok
     case "GOT_PRICE_ESTIMATE":
       return Object.assign({}, state, {pricing: action.payload.price})
     case "STATUS_RIDE_REQUEST":
-      debugger
       return Object.assign({}, state, {rideStatus: action.payload.result.status})
     default:
       return state
