@@ -1,7 +1,7 @@
 export default class UserAdapter {
 
   static baseUrl() {
-    return 'https://git.heroku.com/tripn-api.git/user'   
+    return 'https://tripn-app-api.herokuapp.com/user'   
   }
 
   static getUserInfo() {
